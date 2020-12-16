@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TodoListApp.Core.Domain
 {
-    public class SingleTask
+    public class SingleTask : IEntity
     {
         public int SingleTaskId { get; private set; }
         public string TaskName { get; private set; }

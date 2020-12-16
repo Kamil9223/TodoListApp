@@ -2,7 +2,7 @@
 
 namespace TodoListApp.Core.Domain
 {
-    public class User
+    public class User : IEntity
     {
         public int UserId { get; private set; }
         public string Email { get; private set; }
