@@ -10,7 +10,7 @@ using TodoListApp.Persistance.Context;
 namespace TodoListApp.Persistance.Context.Migrations
 {
     [DbContext(typeof(TodoTasksContext))]
-    [Migration("20201216134519_Initial")]
+    [Migration("20201216214757_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

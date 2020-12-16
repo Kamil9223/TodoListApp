@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20201216134255_Initial.cs" />
-    <Compile Remove="Migrations\20201216134255_Initial.Designer.cs" />
+    <Compile Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,10 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TodoListApp.Application\TodoListApp.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
