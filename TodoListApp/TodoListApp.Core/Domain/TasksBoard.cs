@@ -10,9 +10,9 @@ namespace TodoListApp.Core.Domain
         public User User { get; set; }
         public ICollection<SingleTask> Tasks { get; set; }
 
-        public TasksBoard(string catrgoryName)
+        public TasksBoard(string categoryName)
         {
-            CategoryName = catrgoryName;
+            CategoryName = categoryName;
             Tasks = new HashSet<SingleTask>();
         }
     }

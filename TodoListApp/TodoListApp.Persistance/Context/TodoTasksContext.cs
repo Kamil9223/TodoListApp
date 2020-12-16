@@ -10,6 +10,10 @@ namespace TodoListApp.Persistance.Context
         public DbSet<TaskDetails> TasksDetails { get; set; }
         public DbSet<SingleTask> Tasks { get; set; }
 
+        public TodoTasksContext() { }
+
+        public TodoTasksContext(DbContextOptions<TodoTasksContext> options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TodoTasksContext).Assembly);
