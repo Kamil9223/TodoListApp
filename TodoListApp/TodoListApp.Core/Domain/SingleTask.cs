@@ -5,11 +5,12 @@ namespace TodoListApp.Core.Domain
 {
     public class SingleTask
     {
-        public uint SingleTaskId { get; private set; }
+        public int SingleTaskId { get; private set; }
         public string TaskName { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime PredictedFinishDate { get; private set; }
         public PriorityLevel Priority { get; private set; }
+        public TasksBoard Board { get; set; }
         public ICollection<TaskDetails> Details { get; set; }
 
         public SingleTask(string taskName, DateTime createdAt, DateTime predictedFinishDate, 
