@@ -3,7 +3,7 @@
 
 namespace TodoListApp.Core.Domain
 {
-    public class TasksBoard
+    public class TasksBoard : IEntity
     {
         public int TasksBoardId { get; private set; }
         public string CategoryName { get; private set; }

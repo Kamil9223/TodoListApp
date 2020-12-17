@@ -1,6 +1,6 @@
 ﻿namespace TodoListApp.Core.Domain
 {
-    public class TaskDetails
+    public class TaskDetails : IEntity
     {
         public int TaskDetailsId { get; private set; }
         public string TaskDetailName { get; private set; }

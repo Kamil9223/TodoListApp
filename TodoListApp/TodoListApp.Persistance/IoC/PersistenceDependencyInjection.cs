@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TodoListApp.Core.DomainAccessAbstraction;
 using TodoListApp.Persistance.Context;
+using TodoListApp.Persistance.DataAccess;
 
 namespace TodoListApp.Persistance.IoC
 {
@@ -11,6 +13,10 @@ namespace TodoListApp.Persistance.IoC
         {
             services.AddDbContext<TodoTasksContext>(x => 
                 x.UseSqlServer(configuration.GetConnectionString("TodoTasksDb")));
+
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }
