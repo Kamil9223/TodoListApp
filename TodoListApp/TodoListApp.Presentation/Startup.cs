@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TodoListApp.Application.IoC;
 using TodoListApp.Persistance.IoC;
 
 namespace TodoListApp.Presentation
@@ -22,6 +23,7 @@ namespace TodoListApp.Presentation
             services.AddControllersWithViews();
 
             services.AddPersistence(Configuration);
+            services.AddApplication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
