@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using TodoListApp.Core.DomainAccessAbstraction;
@@ -17,8 +16,7 @@ namespace TodoListApp.Application.Users.Commands
 
         public Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            //TODO
-            throw new NotImplementedException();
+            
         }
     }
 }

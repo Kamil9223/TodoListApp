@@ -17,26 +17,28 @@ namespace TodoListApp.Presentation.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Register([FromBody] RegisterUserCommand command )
+        public async Task<IActionResult> Register(RegisterUserCommand command)
         {
-            _mediator.Send(command);
+            await _mediator.Send(command);
 
-            return View();
+            return RedirectToAction(nameof(Login));
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(string userName, string password)
+        public async Task<IActionResult> Login(string userName, string password)
         {
             return View();
         }
