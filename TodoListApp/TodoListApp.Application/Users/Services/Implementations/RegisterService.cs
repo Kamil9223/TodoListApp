@@ -23,7 +23,7 @@ namespace TodoListApp.Application.Users.Services.Implementations
             if (command.Password != command.ConfirmedPassword)
                 throw new Exception();//TODO
 
-            var existedUser = await _unitOfWork.Users.Find(x => x.Email == command.Email);
+            var existedUser = await _unitOfWork.Users.GetByEmail(command.Email);
             if (existedUser != null)
                 throw new Exception();//TODO
 

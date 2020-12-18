@@ -12,6 +12,12 @@ namespace TodoListApp.Persistance.DataAccess
             : base(todoTasksContext)
         { }
 
+        public async Task<User> GetByEmail(string email)
+        {
+            return await DbContext.Users
+                .FirstOrDefaultAsync(x => x.Email == email);
+        }
+
         public async Task<User> GetUserWithBoards(int userId)
         {
             return await DbContext.Users
