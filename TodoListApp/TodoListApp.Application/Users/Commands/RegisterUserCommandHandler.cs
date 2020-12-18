@@ -1,22 +1,24 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using TodoListApp.Core.DomainAccessAbstraction;
+using TodoListApp.Application.Users.Services.Abstractions;
 
 namespace TodoListApp.Application.Users.Commands
 {
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRegisterService _registerService;
 
-        public RegisterUserCommandHandler(IUnitOfWork unitOfWork)
+        public RegisterUserCommandHandler(IRegisterService registerService)
         {
-            _unitOfWork = unitOfWork;
+            _registerService = registerService;
         }
 
-        public Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            
+            await _registerService.Register(request);
+
+            return Unit.Value;
         }
     }
 }
