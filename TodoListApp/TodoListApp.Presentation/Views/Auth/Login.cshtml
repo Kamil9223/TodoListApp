@@ -4,24 +4,24 @@
 }
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <h2><strong>Login Page </strong></h2><br />
-            <form asp-action="login" method="post">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                </div>
-                <div class="form-check">
-                    <button class="btn btn-info" type="reset">Reset</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
+    <div class="bg-light d-flex justify-content-center p-3">
+        <i class="fa fa-8x fa-user-circle"></i>
+    </div>
+    <div class="bg-light text-center d-flex justify-content-center p-2">
+        <form asp-action="login" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            </div>
+            <div >
+                <button class="btn btn-primary" type="submit">Login</button>
+            </div>
+            <div>
+                <a asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
+            </div>
+        </form>
     </div>
 </div>
 
