@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using TodoListApp.Application.Users.Services.Abstractions;
@@ -10,10 +11,20 @@ namespace TodoListApp.Application.IoC
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Auth/Login";
+                    options.Cookie.Name = "cookieAuth";
+                });
+
+            services.AddHttpContextAccessor();
+
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IEncrypter, Encrypter>();
+            services.AddScoped<ILoginService, LoginService>();
 
             return services;
         }

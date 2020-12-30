@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using TodoListApp.Application.Users.Commands;
@@ -38,9 +35,11 @@ namespace TodoListApp.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string userName, string password)
+        public async Task<IActionResult> Login(LoginUserCommand command)
         {
-            return View();
+            await _mediator.Send(command);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
