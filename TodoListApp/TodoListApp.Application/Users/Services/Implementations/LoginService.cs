@@ -42,12 +42,18 @@ namespace TodoListApp.Application.Users.Services.Implementations
 
             var principal = new ClaimsPrincipal(claimIdentity);
 
-            await _httpAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+            await _httpAccessor.HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                principal,
+                new AuthenticationProperties
+                {
+                    IsPersistent = false
+                });
         }
 
-        public Task LogOut()
+        public async Task LogOut()
         {
-            throw new System.NotImplementedException();
+            await _httpAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
     }
 }

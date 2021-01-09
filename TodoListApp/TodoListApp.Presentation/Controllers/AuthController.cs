@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoListApp.Application.Users.Commands;
 
@@ -40,6 +41,22 @@ namespace TodoListApp.Presentation.Controllers
             await _mediator.Send(command);
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _mediator.Send(new LogoutUserCommand());
+
+            return RedirectToAction(nameof(Login));
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            return View();
         }
     }
 }
