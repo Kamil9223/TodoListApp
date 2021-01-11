@@ -35,7 +35,8 @@ namespace TodoListApp.Application.Users.Services.Implementations
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.Email, command.Email)
+                new Claim(ClaimTypes.Email, command.Email),
+                new Claim("Id", user.UserId.ToString())
             };
 
             var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

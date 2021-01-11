@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoListApp.Application.Users.Commands;
+using TodoListApp.Application.Users.Queries;
 
 namespace TodoListApp.Presentation.Controllers
 {
@@ -54,9 +55,14 @@ namespace TodoListApp.Presentation.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile(int id)
         {
-            return View();
+            var profile = await _mediator.Send(new ProfileQuery
+            {
+                userId = id
+            });
+
+            return View(profile);
         }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
 using TodoListApp.Application.IoC;
 using TodoListApp.Persistance.IoC;
 
@@ -20,7 +21,8 @@ namespace TodoListApp.Presentation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            var applicationLayerAssembly = Assembly.Load("TodoListApp.Application");
+            services.AddControllersWithViews().AddApplicationPart(applicationLayerAssembly);
 
             services.AddPersistence(Configuration);
             services.AddApplication();
