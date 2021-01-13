@@ -7,7 +7,7 @@ using TodoListApp.Application.Users.Queries;
 
 namespace TodoListApp.Presentation.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : BasicController
     {
         private readonly IMediator _mediator;
 
@@ -25,6 +25,9 @@ namespace TodoListApp.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserCommand command)
         {
+            if (!ModelState.IsValid)
+                return View();
+
             await _mediator.Send(command);
 
             return RedirectToAction(nameof(Login));
@@ -39,6 +42,9 @@ namespace TodoListApp.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginUserCommand command)
         {
+            if (!ModelState.IsValid)
+                return View();
+
             await _mediator.Send(command);
 
             return RedirectToAction("Index", "Home");

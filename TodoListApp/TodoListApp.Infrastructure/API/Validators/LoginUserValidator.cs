@@ -12,7 +12,7 @@ namespace TodoListApp.Infrastructure.API.Validators
                 .MaximumLength(80);
 
             RuleFor(x => x.Password)
-                .MaximumLength(5)
+                .MinimumLength(5)
                 .MaximumLength(20)
                 .NotNull();
         }
