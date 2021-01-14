@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using TodoListApp.Application.Exceptions;
 using TodoListApp.Application.Users.Commands;
 using TodoListApp.Application.Users.Services.Abstractions;
 using TodoListApp.Core.Domain;
@@ -21,11 +22,11 @@ namespace TodoListApp.Application.Users.Services.Implementations
         public async Task Register(RegisterUserCommand command)
         {
             if (command.Password != command.ConfirmedPassword)
-                throw new Exception();//TODO
+                throw new InvalidCredentialsException("Confirmed password is different than password", "");
 
             var existedUser = await _unitOfWork.Users.GetByEmail(command.Email);
             if (existedUser != null)
-                throw new Exception();//TODO
+                throw new AlreadyExistsException();
 
             var passwordHash = _encrypter.Encrypt(command.Password);
             var user = new User(command.Email, passwordHash);

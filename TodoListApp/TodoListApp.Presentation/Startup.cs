@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +23,12 @@ namespace TodoListApp.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             var applicationLayerAssembly = Assembly.Load("TodoListApp.Application");
-            services.AddControllersWithViews().AddApplicationPart(applicationLayerAssembly);
+            var infrastructureLayerAssembly = Assembly.Load("TodoListApp.Infrastructure");
+
+            services.AddControllersWithViews()
+                .AddApplicationPart(applicationLayerAssembly)
+                .AddFluentValidation(x => 
+                    x.RegisterValidatorsFromAssembly(infrastructureLayerAssembly));
 
             services.AddPersistence(Configuration);
             services.AddApplication();
@@ -37,7 +43,7 @@ namespace TodoListApp.Presentation
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }

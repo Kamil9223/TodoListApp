@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using TodoListApp.Application.Exceptions;
 using TodoListApp.Application.Users.Commands;
 using TodoListApp.Application.Users.Services.Abstractions;
 using TodoListApp.Core.DomainAccessAbstraction;
@@ -27,11 +28,11 @@ namespace TodoListApp.Application.Users.Services.Implementations
         {
             var user = await _unitOfWork.Users.GetByEmail(command.Email);
             if (user == null)
-                throw new Exception("Invalid credentials");
+                throw new InvalidCredentialsException();
 
             var hash = _encrypter.Encrypt(command.Password);
             if (user.PasswordHash != hash)
-                throw new Exception("Invalid credentials");
+                throw new InvalidCredentialsException();
 
             var claims = new[]
             {
