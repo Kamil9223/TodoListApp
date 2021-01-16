@@ -7,7 +7,7 @@ using TodoListApp.Application.Users.Queries;
 
 namespace TodoListApp.Presentation.Controllers
 {
-    public class AuthController : BasicController
+    public class AuthController : Controller
     {
         private readonly IMediator _mediator;
 
