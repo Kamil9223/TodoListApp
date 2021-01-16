@@ -1,18 +1,17 @@
 ﻿@using System.Security.Claims;
 @{ 
     var email = Context.User.Claims.Where(x => x.Type == ClaimTypes.Email).First().Value;
-    var userId = Context.User.Claims.Where(x => x.Type == "Id").First().Value;
 }
 
 <ul class="navbar-nav">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Auth" asp-action="Profile" asp-route-id="@userId">
-            @email
-        </a>
+        <form asp-controller="Auth" asp-action="Profile">
+            <button class="btn btn-link text-dark" type="submit">@email</button>
+        </form>
     </li>
     <li class="nav-item">
         <form asp-controller="Auth" asp-action="Logout">
-            <button class="btn btn-link text-dark" id="logout" type="submit">Logout</button>
+            <button class="btn btn-link text-dark" type="submit">Logout</button>
         </form>
     </li>
 </ul>

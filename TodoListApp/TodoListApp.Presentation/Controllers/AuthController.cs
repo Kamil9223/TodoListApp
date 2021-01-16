@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -60,12 +62,13 @@ namespace TodoListApp.Presentation.Controllers
         }
 
         [Authorize]
-        [HttpGet]
-        public async Task<IActionResult> Profile(int id)
+        [HttpPost]
+        public async Task<IActionResult> Profile()
         {
             var profile = await _mediator.Send(new ProfileQuery
             {
-                userId = id
+                userId = Convert.ToInt32(
+                    HttpContext.User.Claims.Where(x => x.Type == "Id").First().Value)
             });
 
             return View(profile);
