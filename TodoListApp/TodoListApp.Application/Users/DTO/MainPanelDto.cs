@@ -16,6 +16,6 @@ namespace TodoListApp.Application.Users.DTO
         public int SingleTaskId { get; set; }
         public string TaskName { get; set; }
         public PriorityLevel Priority { get; set; }
-        public bool PredictedBestBeforeDate { get; set; }
+        public bool PredictedBestBeforeDateExceeded { get; set; }
     }
 }

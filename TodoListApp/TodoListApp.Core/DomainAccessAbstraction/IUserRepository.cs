@@ -6,6 +6,6 @@ namespace TodoListApp.Core.DomainAccessAbstraction
     public interface IUserRepository : IRepository<User>
     {
         Task<User> GetByEmail(string email);
-        Task<User> GetUserWithBoards(int userId);
+        Task<User> GetUserWithFirstBoard(int userId);
     }
 }
