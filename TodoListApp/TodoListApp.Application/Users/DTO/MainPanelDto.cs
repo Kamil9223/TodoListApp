@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TodoListApp.Core.Domain;
 
 namespace TodoListApp.Application.Users.DTO
 {
@@ -9,13 +8,5 @@ namespace TodoListApp.Application.Users.DTO
         public List<string> CategoryNames { get; set; }
         public List<MainPanelTasksDto> Tasks { get; set; }
 
-    }
-
-    public class MainPanelTasksDto
-    {
-        public int SingleTaskId { get; set; }
-        public string TaskName { get; set; }
-        public PriorityLevel Priority { get; set; }
-        public bool PredictedBestBeforeDateExceeded { get; set; }
     }
 }
