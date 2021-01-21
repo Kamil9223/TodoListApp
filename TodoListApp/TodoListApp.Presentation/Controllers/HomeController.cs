@@ -36,5 +36,11 @@ namespace TodoListApp.Presentation.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Tasks(string category)
+        {
+            return PartialView(nameof(Tasks),"test" + category);
+        }
     }
 }

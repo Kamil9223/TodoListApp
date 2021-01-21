@@ -2,17 +2,36 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-S
+
 <div class="container">
     
     <div class="row">
 
-        <div class="col-3" style="border: 1px dotted black">
+        <div id="sideMenu" class="col-3" style="border: 1px dotted black">
+            @if (!Model.CategoryNames.Any())
+            {
+                <span>There are no categories</span>
+            }
+            else
+            {
+                <ul class="list-group">
+                    @foreach (var category in Model.CategoryNames)
+                    {
+                        <li class="list-group-item">
+                            <button class="btn-block" value="@category">@category</button>
+                        </li>
+                    }
+                </ul>
+            }
 
+            <hr />
+            <form>
+                <button class="btn btn-dark" type="submit">New Category</button>
+            </form>
         </div>
 
-        <div class="col" style="border: 1px dotted red">
-
+        <div id="dynamicContent" class="col" style="border: 1px dotted red">
+           
         </div>
 
     </div>

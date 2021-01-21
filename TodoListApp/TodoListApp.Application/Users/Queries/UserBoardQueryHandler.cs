@@ -25,7 +25,9 @@ namespace TodoListApp.Application.Users.Queries
 
             var mainPanel = new MainPanelDto
             {
-                FirstBoardId = userWithMainPanel.Boards.FirstOrDefault().TasksBoardId,
+                FirstBoardId = userWithMainPanel.Boards.Any() 
+                    ? userWithMainPanel.Boards.FirstOrDefault().TasksBoardId
+                    : default,
                 CategoryNames = userWithMainPanel.Boards.Select(x => x.CategoryName).ToList(),
                 Tasks = new List<MainPanelTasksDto>()
             };
