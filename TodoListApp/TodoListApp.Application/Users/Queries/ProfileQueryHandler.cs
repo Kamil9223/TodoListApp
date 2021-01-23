@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using TodoListApp.Application.Users.DTO;
@@ -8,23 +9,20 @@ namespace TodoListApp.Application.Users.Queries
 {
     public class ProfileQueryHandler : IRequestHandler<ProfileQuery, ProfileDto>
     {
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public ProfileQueryHandler(IUnitOfWork unitOfWork)
+        public ProfileQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<ProfileDto> Handle(ProfileQuery request, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.Users.Get(request.userId);
 
-            return new ProfileDto //TODO: use automapper
-            {
-                UserId = user.UserId,
-                Email = user.Email,
-                Points = user.Points
-            };
+            return _mapper.Map<ProfileDto>(user);
         }
     }
 }

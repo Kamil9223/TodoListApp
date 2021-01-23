@@ -1,5 +1,5 @@
-﻿using MediatR;
-using System;
+﻿using AutoMapper;
+using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -11,11 +11,13 @@ namespace TodoListApp.Application.Users.Queries
 {
     public class UserBoardQueryHandler : IRequestHandler<UserBoardQuery, MainPanelDto>
     {
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UserBoardQueryHandler(IUnitOfWork unitOfWork)
+        public UserBoardQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<MainPanelDto> Handle(UserBoardQuery request, CancellationToken cancellationToken)
@@ -36,13 +38,7 @@ namespace TodoListApp.Application.Users.Queries
             {
                 foreach(var dbTask in userWithMainPanel.Boards.First().Tasks)
                 {
-                    mainPanel.Tasks.Add(new MainPanelTasksDto //TODO: automapper
-                    {
-                        SingleTaskId = dbTask.SingleTaskId,
-                        TaskName = dbTask.TaskName,
-                        Priority = dbTask.Priority,
-                        PredictedBestBeforeDateExceeded = dbTask.PredictedFinishDate > DateTime.Now //TODO: TimeServie is better option than Datetime.Now
-                    });
+                    mainPanel.Tasks.Add(_mapper.Map<MainPanelTasksDto>(dbTask));
                 }
             }
 
