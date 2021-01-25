@@ -15,5 +15,11 @@ namespace TodoListApp.Core.Domain
             CategoryName = categoryName;
             Tasks = new HashSet<SingleTask>();
         }
+
+        public TasksBoard(int taskBoardId, string categoryName)
+        {
+            TasksBoardId = taskBoardId;
+            CategoryName = categoryName;
+        }
     }
 }

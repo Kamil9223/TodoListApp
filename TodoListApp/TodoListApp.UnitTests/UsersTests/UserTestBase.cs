@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using TodoListApp.Application.Mapper;
 using TodoListApp.Core.DomainAccessAbstraction;
 using TodoListApp.UnitTests.TestData.FakeImplementations;
@@ -18,9 +19,10 @@ namespace TodoListApp.UnitTests.UsersTests
             return configurationProvider.CreateMapper();
         }
 
-        protected FakeUnitOfWork CreateUnitOfWorkMock(DbContext context, IUserRepository userRepository)
+        protected FakeUnitOfWork CreateUnitOfWorkMock(DbContext context, 
+            Mock<IUserRepository> userRepositoryMock)
         {
-            return new FakeUnitOfWork(context, userRepository);
+            return new FakeUnitOfWork(context, userRepositoryMock);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Moq;
 using System.Threading.Tasks;
 using TodoListApp.Core.DomainAccessAbstraction;
 
@@ -8,12 +9,14 @@ namespace TodoListApp.UnitTests.TestData.FakeImplementations
     {
         private readonly DbContext _dbContext;
 
-        public IUserRepository Users { get; }
+        public IUserRepository Users { get => UsersMock.Object; }
 
-        public FakeUnitOfWork(DbContext dbContext, IUserRepository users)
+        public Mock<IUserRepository> UsersMock { get; set; }
+
+        public FakeUnitOfWork(DbContext dbContext, Mock<IUserRepository> usersMock)
         {
             _dbContext = dbContext;
-            Users = users;
+            UsersMock = usersMock;
         }
 
         public async Task<int> Complete()
