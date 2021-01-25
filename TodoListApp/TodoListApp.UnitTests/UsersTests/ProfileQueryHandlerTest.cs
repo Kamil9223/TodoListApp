@@ -38,7 +38,7 @@ namespace TodoListApp.UnitTests.UsersTests
                 userId = 1
             }, CancellationToken.None);
 
-            result.Email.Should().Be(UserRepositoryMock.UserEmail);
+            result.Email.Should().Be(UserRepositoryTestData.UserEmail);
             result.Points.Should().Be(11);
         }
     }

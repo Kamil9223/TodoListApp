@@ -4,7 +4,7 @@ using TodoListApp.Core.Domain;
 
 namespace TodoListApp.UnitTests.TestData.Mocks
 {
-    public class UserRepositoryMock
+    public class UserRepositoryTestData
     {
         public const string UserEmail = "test@email.com";
 

@@ -9,7 +9,7 @@ namespace TodoListApp.UnitTests.TestData.Mocks
         public static Mock<IUserRepository> SetupUser(this Mock<IUserRepository> repositoryMock)
         {
             repositoryMock.Setup(x => x.Get(It.IsAny<int>()))
-                .Returns(Task.FromResult(UserRepositoryMock.CreateUser()));
+                .Returns(Task.FromResult(UserRepositoryTestData.CreateUser()));
 
             return repositoryMock;
         }
@@ -17,7 +17,7 @@ namespace TodoListApp.UnitTests.TestData.Mocks
         public static Mock<IUserRepository> SetupUserWithFirstBoard(this Mock<IUserRepository> repositoryMock)
         {
             repositoryMock.Setup(x => x.GetUserWithFirstBoard(It.IsAny<int>()))
-                .Returns(Task.FromResult(UserRepositoryMock.CreateUserWithFirstBoard()));
+                .Returns(Task.FromResult(UserRepositoryTestData.CreateUserWithFirstBoard()));
 
             return repositoryMock;
         }
@@ -25,7 +25,7 @@ namespace TodoListApp.UnitTests.TestData.Mocks
         public static Mock<IUserRepository> SetupUserWithoutAnyBoards(this Mock<IUserRepository> repositoryMock)
         {
             repositoryMock.Setup(x => x.GetUserWithFirstBoard(It.IsAny<int>()))
-                .Returns(Task.FromResult(UserRepositoryMock.CreateUser()));
+                .Returns(Task.FromResult(UserRepositoryTestData.CreateUser()));
 
             return repositoryMock;
         }
