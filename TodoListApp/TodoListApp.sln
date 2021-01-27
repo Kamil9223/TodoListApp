@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoListApp.Persistance", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoListApp.Infrastructure", "TodoListApp.Infrastructure\TodoListApp.Infrastructure.csproj", "{F2803F34-11A7-494D-A2F8-CD2DD0D1B301}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoListApp.IntegrationTests", "TodoListApp.IntegrationTests\TodoListApp.IntegrationTests.csproj", "{CC00F99E-6B26-4277-B09F-9509B52382EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,12 +49,17 @@ Global
 		{F2803F34-11A7-494D-A2F8-CD2DD0D1B301}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2803F34-11A7-494D-A2F8-CD2DD0D1B301}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2803F34-11A7-494D-A2F8-CD2DD0D1B301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC00F99E-6B26-4277-B09F-9509B52382EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC00F99E-6B26-4277-B09F-9509B52382EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC00F99E-6B26-4277-B09F-9509B52382EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC00F99E-6B26-4277-B09F-9509B52382EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0D2B739B-68FB-473F-B004-48CA8D9F691C} = {108660BB-BF72-4935-9305-3CA517E927BD}
+		{CC00F99E-6B26-4277-B09F-9509B52382EE} = {108660BB-BF72-4935-9305-3CA517E927BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {965941B9-B4F5-4C43-A6F5-7473BAED3C01}

@@ -22,11 +22,10 @@ namespace TodoListApp.Application.Users.Queries
 
         public async Task<MainPanelDto> Handle(UserBoardQuery request, CancellationToken cancellationToken)
         {
-            //TODO: EF Core Query should be refacotred. For now just for test
-            var userWithMainPanel = await _unitOfWork.Users.GetUserWithFirstBoard(request.userId);
+            var userWithMainPanel = await _unitOfWork.Users.GetUserWithBoards(request.userId);
 
             var mainPanel = new MainPanelDto
-            {
+            {//TODO: narazie trzeba sortować tutaj i zapisać w zmiennej posortowane dane po nazwie kategorii, więc ten id będzie idkiem pierwszego rekordu po nazwie kategorii
                 FirstBoardId = userWithMainPanel.Boards.Any() 
                     ? userWithMainPanel.Boards.FirstOrDefault().TasksBoardId
                     : default,

@@ -19,10 +19,11 @@ namespace TodoListApp.Persistance.DataAccess
                 .FirstOrDefaultAsync(x => x.Email == email);
         }
 
-        public async Task<User> GetUserWithFirstBoard(int userId)
+        public async Task<User> GetUserWithBoards(int userId)
         {
             return await DbContext.Users
                 .Include(x => x.Boards)
+                    .ThenInclude(x => x.Tasks)
                 .FirstOrDefaultAsync(x => x.UserId == userId);
         }
     }

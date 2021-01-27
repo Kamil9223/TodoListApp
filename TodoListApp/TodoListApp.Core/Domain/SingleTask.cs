@@ -22,6 +22,17 @@ namespace TodoListApp.Core.Domain
             Priority = priority;
             Details = new HashSet<TaskDetails>();
         }
+
+        public SingleTask(int singleTaskId, string taskName, DateTime createdAt, 
+            DateTime predictedFinishDate, PriorityLevel priority)
+        {
+            SingleTaskId = singleTaskId;
+            TaskName = taskName;
+            CreatedAt = createdAt;
+            PredictedFinishDate = predictedFinishDate;
+            Priority = priority;
+            Details = new HashSet<TaskDetails>();
+        }
     }
 
     public enum PriorityLevel
