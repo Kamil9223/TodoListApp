@@ -23,6 +23,7 @@ namespace TodoListApp.Persistance.DataAccess
         {
             return await DbContext.Users
                 .Include(x => x.Boards)
+                    .ThenInclude(x => x.Tasks)
                 .FirstOrDefaultAsync(x => x.UserId == userId);
         }
     }

@@ -1,10 +1,8 @@
 ﻿using FluentAssertions;
-using System;
+using System.Linq;
 using System.Threading.Tasks;
-using TodoListApp.Core.Domain;
 using TodoListApp.Core.DomainAccessAbstraction;
 using TodoListApp.IntegrationTests.DatabaseIntegration.DatabaseConfiguration;
-using TodoListApp.Persistance.Context;
 using TodoListApp.Persistance.DataAccess;
 using Xunit;
 
@@ -23,12 +21,22 @@ namespace TodoListApp.IntegrationTests.DatabaseIntegration.Tests
         }
 
         [Fact]
-        public async Task Should_returns_user_by_email() //TODO: Refactoring
+        public async Task Should_returns_user_by_email()
         {
             var user = await _userRepository.GetByEmail("testEmail");
 
             user.Should().NotBeNull();
             user.Email.Should().Be("testEmail");
+        }
+
+        [Fact]
+        public async Task Should_returns_user_with_boards_and_tasks()
+        {
+            var userWithBoards = await _userRepository.GetUserWithBoards(1);
+
+            userWithBoards.Should().NotBeNull();
+            userWithBoards.Boards.Should().HaveCount(2);
+            userWithBoards.Boards.First().Tasks.Should().HaveCount(2);
         }
     }
 }
