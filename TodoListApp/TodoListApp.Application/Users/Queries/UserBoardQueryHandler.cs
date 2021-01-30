@@ -24,23 +24,22 @@ namespace TodoListApp.Application.Users.Queries
         {
             var userWithMainPanel = await _unitOfWork.Users.GetUserWithBoards(request.userId);
 
+            var sortedBoards = userWithMainPanel.Boards.OrderBy(x => x.CategoryName).ToList();
+
             var mainPanel = new MainPanelDto
-            {//TODO: narazie trzeba sortować tutaj i zapisać w zmiennej posortowane dane po nazwie kategorii, więc ten id będzie idkiem pierwszego rekordu po nazwie kategorii
-                FirstBoardId = userWithMainPanel.Boards.Any() 
-                    ? userWithMainPanel.Boards.FirstOrDefault().TasksBoardId
-                    : default,
-                CategoryNames = userWithMainPanel.Boards.Select(x => x.CategoryName).ToList(),
+            {
+                CategoryNames = sortedBoards.Select(x => x.CategoryName).ToList(),
                 Tasks = new List<MainPanelTasksDto>()
             };
 
-            if (mainPanel.FirstBoardId != default)
+            if (sortedBoards.Any())
             {
-                foreach(var dbTask in userWithMainPanel.Boards.First().Tasks)
+                foreach (var dbTask in sortedBoards.First().Tasks)
                 {
                     mainPanel.Tasks.Add(_mapper.Map<MainPanelTasksDto>(dbTask));
                 }
             }
-
+            
             return mainPanel;
         }
     }

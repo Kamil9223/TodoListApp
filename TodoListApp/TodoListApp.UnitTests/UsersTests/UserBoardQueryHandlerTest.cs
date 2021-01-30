@@ -31,7 +31,7 @@ namespace TodoListApp.UnitTests.UsersTests
         {
             var userBoardQueryHandler = new UserBoardQueryHandler(_fakeUnitOfWork, _mapper);
 
-            _fakeUnitOfWork.UsersMock.SetupUserWithFirstBoard();
+            _fakeUnitOfWork.UsersMock.SetupUserWithBoardsAndTasks();
 
             var result = await userBoardQueryHandler.Handle(new UserBoardQuery
             {
@@ -39,7 +39,6 @@ namespace TodoListApp.UnitTests.UsersTests
             }, CancellationToken.None);
 
             result.Tasks.Should().HaveCount(3);
-            result.FirstBoardId.Should().Be(1);
             result.CategoryNames.Should().HaveCount(2);
         }
 
@@ -57,7 +56,6 @@ namespace TodoListApp.UnitTests.UsersTests
 
             result.Tasks.Should().BeEmpty();
             result.CategoryNames.Should().BeEmpty();
-            result.FirstBoardId.Should().Be(0);
         }
     }
 }

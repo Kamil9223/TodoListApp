@@ -14,10 +14,10 @@ namespace TodoListApp.UnitTests.TestData.Mocks
             return repositoryMock;
         }
 
-        public static Mock<IUserRepository> SetupUserWithFirstBoard(this Mock<IUserRepository> repositoryMock)
+        public static Mock<IUserRepository> SetupUserWithBoardsAndTasks(this Mock<IUserRepository> repositoryMock)
         {
             repositoryMock.Setup(x => x.GetUserWithBoards(It.IsAny<int>()))
-                .Returns(Task.FromResult(UserRepositoryTestData.CreateUserWithFirstBoard()));
+                .Returns(Task.FromResult(UserRepositoryTestData.CreateUserWithBoardsAndTasks()));
 
             return repositoryMock;
         }

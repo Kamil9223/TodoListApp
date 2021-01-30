@@ -13,8 +13,7 @@ namespace TodoListApp.UnitTests.TestData.Mocks
             return new User(1, UserEmail, "", 11);
         }
 
-        //TODO: poprawić nazwę (tyczy się też metody w repozytorium
-        public static User CreateUserWithFirstBoard()
+        public static User CreateUserWithBoardsAndTasks()
         {
             var user = new User(UserEmail, "");
 
