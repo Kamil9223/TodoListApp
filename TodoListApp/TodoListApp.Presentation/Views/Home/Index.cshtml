@@ -7,7 +7,7 @@
     
     <div class="row">
 
-        <div id="sideMenu" class="col-3" style="border: 1px dotted black">
+        <div id="sideMenu" class="col-3">
             @if (!Model.CategoryNames.Any())
             {
                 <span>There are no categories</span>
@@ -17,8 +17,8 @@
                 <ul class="list-group">
                     @foreach (var category in Model.CategoryNames)
                     {
-                        <li class="list-group-item">
-                            <button class="btn-block" value="@category">@category</button>
+                        <li class="d-flex d-block mt-2 shadow rounded">
+                            <button class="btn btn-light w-100 h-100" value="@category">@category</button>   
                         </li>
                     }
                 </ul>
@@ -26,11 +26,13 @@
 
             <hr />
             <form>
-                <button class="btn btn-dark list-group-item" type="submit">New Category</button>
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-dark" type="submit">New Category</button>
+                </div>   
             </form>
         </div>
 
-        <div id="dynamicContent" class="col" style="border: 1px dotted red">
+        <div id="dynamicContent" class="col">
             <ul class="list-group">
                 @foreach (var task in Model.Tasks)
                 {
@@ -74,12 +76,12 @@
                             }
                         </div>
                         <div class="col-sm justify-content-center">
-                            <button class="d-inline-block">Details</button>
+                            <button class="btn btn-dark">Details</button>
                         </div>
                     </div>
                 </li>
-            }
-                </ul>
+                }
+            </ul>
         </div>
 
     </div>
