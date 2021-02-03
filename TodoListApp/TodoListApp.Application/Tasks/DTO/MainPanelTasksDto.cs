@@ -1,6 +1,6 @@
 ﻿using TodoListApp.Core.Domain;
 
-namespace TodoListApp.Application.Users.DTO
+namespace TodoListApp.Application.Tasks.DTO
 {
     public class MainPanelTasksDto
     {

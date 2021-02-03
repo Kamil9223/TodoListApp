@@ -1,7 +1,11 @@
-﻿@model TodoListApp.Application.Tasks.DTO.TasksCollectionDto
+﻿@model List<TodoListApp.Application.Tasks.DTO.MainPanelTasksDto>
 
+@if (!Model.Any())
+{
+    <h1>Tasks list is empty</h1>
+}
 <ul class="list-group">
-    @foreach (var task in Model.Tasks)
+    @foreach (var task in Model)
     {
         <li class="list-group-item bg-light mt-2">
             <div class="row">

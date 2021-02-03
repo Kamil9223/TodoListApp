@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TodoListApp.Application.Tasks.DTO;
 
 namespace TodoListApp.Application.Users.DTO
 {
