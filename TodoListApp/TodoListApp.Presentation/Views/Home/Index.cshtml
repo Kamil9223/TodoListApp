@@ -8,17 +8,17 @@
     <div class="row">
 
         <div id="sideMenu" class="col-3">
-            @if (!Model.CategoryNames.Any())
+            @if (!Model.Categories.Any())
             {
                 <span>There are no categories</span>
             }
             else
             {
                 <ul class="list-group">
-                    @foreach (var category in Model.CategoryNames)
+                    @foreach (var category in Model.Categories)
                     {
                         <li class="d-flex d-block mt-2 shadow rounded">
-                            <button class="btn btn-light w-100 h-100" value="@category">@category</button>   
+                            <button class="btn btn-light w-100 h-100" value="@category.Key">@category.Value</button>   
                         </li>
                     }
                 </ul>

@@ -4,7 +4,7 @@ namespace TodoListApp.Application.Users.DTO
 {
     public class MainPanelDto
     {
-        public List<string> CategoryNames { get; set; }
+        public Dictionary<int, string> Categories { get; set; }
         public List<MainPanelTasksDto> Tasks { get; set; }
 
     }

@@ -28,7 +28,7 @@ namespace TodoListApp.Application.Users.Queries
 
             var mainPanel = new MainPanelDto
             {
-                CategoryNames = sortedBoards.Select(x => x.CategoryName).ToList(),
+                Categories = sortedBoards.ToDictionary(x => x.TasksBoardId, x => x.CategoryName),
                 Tasks = new List<MainPanelTasksDto>()
             };
 

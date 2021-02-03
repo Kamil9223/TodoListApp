@@ -38,9 +38,10 @@ namespace TodoListApp.Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Tasks(string category)
+        public IActionResult Tasks(int categoryId)
         {
-            return PartialView(nameof(Tasks),"test" + category);
+
+            return PartialView(nameof(Tasks), categoryId);
         }
     }
 }

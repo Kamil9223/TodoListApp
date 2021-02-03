@@ -3,7 +3,6 @@
 
 // Write your JavaScript code.
 
-
 $('#sideMenu button').click(function () {
-    $('#dynamicContent').load("Home/Tasks", { "category": $(this).val() });
+    $('#dynamicContent').load("Home/Tasks", { "categoryId": $(this).val() });
 });

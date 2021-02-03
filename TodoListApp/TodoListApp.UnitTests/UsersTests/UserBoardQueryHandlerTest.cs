@@ -39,7 +39,7 @@ namespace TodoListApp.UnitTests.UsersTests
             }, CancellationToken.None);
 
             result.Tasks.Should().HaveCount(3);
-            result.CategoryNames.Should().HaveCount(2);
+            result.Categories.Should().HaveCount(2);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace TodoListApp.UnitTests.UsersTests
             }, CancellationToken.None);
 
             result.Tasks.Should().BeEmpty();
-            result.CategoryNames.Should().BeEmpty();
+            result.Categories.Should().BeEmpty();
         }
     }
 }
