@@ -10,6 +10,7 @@ namespace TodoListApp.UnitTests.TestData.FakeImplementations
         private readonly DbContext _dbContext;
 
         public IUserRepository Users { get => UsersMock.Object; }
+        public ISingleTaskRepository Tasks { get; }
 
         public Mock<IUserRepository> UsersMock { get; set; }
 

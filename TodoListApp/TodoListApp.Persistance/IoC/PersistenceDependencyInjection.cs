@@ -15,6 +15,7 @@ namespace TodoListApp.Persistance.IoC
                 x.UseSqlServer(configuration.GetConnectionString("TodoTasksDb")));
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISingleTaskRepository, SingleTaskRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
