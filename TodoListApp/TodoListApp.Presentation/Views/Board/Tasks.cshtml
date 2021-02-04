@@ -1,0 +1,56 @@
+﻿@model List<TodoListApp.Application.Boards.DTO.MainPanelTasksDto>
+
+@if (!Model.Any())
+{
+    <h1>Tasks list is empty</h1>
+}
+<ul class="list-group">
+    @foreach (var task in Model)
+    {
+        <li class="list-group-item bg-light mt-2">
+            <div class="row">
+                <div class="col-sm-4">
+                    <text>@task.TaskName</text>
+                </div>
+                <div class="col-sm">
+                    @{
+                        switch (task.Priority)
+                        {
+                            case TodoListApp.Core.Domain.PriorityLevel.Low:
+                                <i class="fas fa-2x fa-circle"></i>
+                                <i class="far fa-2x fa-circle"></i>
+                                <i class="far fa-2x fa-circle"></i>
+                                break;
+                            case TodoListApp.Core.Domain.PriorityLevel.Medium:
+                                <i class="fas fa-2x fa-circle"></i>
+                                <i class="fas fa-2x fa-circle"></i>
+                                <i class="far fa-2x fa-circle"></i>
+                                break;
+                            <i class="fas fa-2x fa-circle"></i>
+                            <i class="fas fa-2x fa-circle"></i>
+                            <i class="fas fa-2x fa-circle"></i>
+                            case TodoListApp.Core.Domain.PriorityLevel.High:
+                                break;
+                        }
+                    }
+                </div>
+                <div class="col-sm text-center">
+                    @{
+                        if (task.PredictedBestBeforeDateExceeded)
+                        {
+                            <i class="fas fa-2x fa-hourglass-end text-danger"></i>
+                        }
+                        else
+                        {
+                            <i class="fas fa-2x fa-hourglass-start text-success"></i>
+                        }
+                    }
+                </div>
+                <div class="col-sm justify-content-center">
+                    <button class="btn btn-dark">Details</button>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+

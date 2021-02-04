@@ -12,8 +12,4 @@
     <ProjectReference Include="..\TodoListApp.Application\TodoListApp.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="API\Middlewares\" />
-  </ItemGroup>
-
 </Project>

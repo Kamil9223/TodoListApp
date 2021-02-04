@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -21,6 +22,7 @@ namespace TodoListApp.Application.IoC
             services.AddHttpContextAccessor();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IEncrypter, Encrypter>();

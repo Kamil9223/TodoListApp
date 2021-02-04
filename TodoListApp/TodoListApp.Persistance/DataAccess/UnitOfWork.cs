@@ -9,11 +9,14 @@ namespace TodoListApp.Persistance.DataAccess
         private readonly TodoTasksContext _todoTasksContext;
 
         public IUserRepository Users { get; }
+        public ISingleTaskRepository Tasks { get; }
 
-        public UnitOfWork(TodoTasksContext todoTasksContext, IUserRepository users)
+        public UnitOfWork(TodoTasksContext todoTasksContext, IUserRepository users, 
+            ISingleTaskRepository tasks)
         {
             _todoTasksContext = todoTasksContext;
             Users = users;
+            Tasks = tasks;
         }
 
         public async Task<int> Complete()

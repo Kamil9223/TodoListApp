@@ -1,6 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using TodoListApp.Application.Users.Queries;
 
 namespace TodoListApp.Presentation.Controllers
 {
@@ -8,15 +13,23 @@ namespace TodoListApp.Presentation.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMediator _mediator;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var mainPanel = await _mediator.Send(new UserBoardQuery
+            {
+                userId = Convert.ToInt32(
+                    HttpContext.User.Claims.Where(x => x.Type == "Id").First().Value)
+            });
+
+            return View(mainPanel);
         }
 
         public IActionResult Privacy()

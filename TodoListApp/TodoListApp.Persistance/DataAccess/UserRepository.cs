@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 using TodoListApp.Core.Domain;
 using TodoListApp.Core.DomainAccessAbstraction;
@@ -22,6 +23,7 @@ namespace TodoListApp.Persistance.DataAccess
         {
             return await DbContext.Users
                 .Include(x => x.Boards)
+                    .ThenInclude(x => x.Tasks)
                 .FirstOrDefaultAsync(x => x.UserId == userId);
         }
     }

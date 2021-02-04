@@ -16,5 +16,14 @@ namespace TodoListApp.Core.Domain
             PasswordHash = passwordHash;
             Boards = new HashSet<TasksBoard>();
         }
+
+        public User(int userId, string email, string passwordHash, int points = default)
+        {
+            UserId = userId;
+            Email = email;
+            PasswordHash = passwordHash;
+            Points = points;
+            Boards = new HashSet<TasksBoard>();
+        }
     }
 }
