@@ -4,5 +4,5 @@
 // Write your JavaScript code.
 
 $('#sideMenu button').click(function () {
-    $('#dynamicContent').load("Home/Tasks", { "taskBoardId": $(this).val() });
+    $('#dynamicContent').load("Board/Tasks", { "taskBoardId": $(this).val() });
 });

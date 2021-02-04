@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using TodoListApp.Application.Tasks.Queries;
 using TodoListApp.Application.Users.Queries;
 
 namespace TodoListApp.Presentation.Controllers
@@ -36,17 +35,6 @@ namespace TodoListApp.Presentation.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Tasks(int taskBoardId)
-        {
-            var tasksCollection = await _mediator.Send(new TasksQuery
-            {
-                TasksBoardId = taskBoardId
-            });
-
-            return PartialView(nameof(Tasks), tasksCollection);
         }
     }
 }
