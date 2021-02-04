@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TodoListApp.Application.Tasks.Queries;
+using TodoListApp.Application.Boards.Queries;
 
 namespace TodoListApp.Presentation.Controllers
 {

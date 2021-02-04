@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using System.Collections.Generic;
-using TodoListApp.Application.Tasks.DTO;
+using TodoListApp.Application.Boards.DTO;
 
-namespace TodoListApp.Application.Tasks.Queries
+namespace TodoListApp.Application.Boards.Queries
 {
     public class TasksQuery : IRequest<List<MainPanelTasksDto>>
     {

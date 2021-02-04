@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using System;
-using TodoListApp.Application.Tasks.DTO;
+using TodoListApp.Application.Boards.DTO;
 using TodoListApp.Application.Users.DTO;
 using TodoListApp.Core.Domain;
 

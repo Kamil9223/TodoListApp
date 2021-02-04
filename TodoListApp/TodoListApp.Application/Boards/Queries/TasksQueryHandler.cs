@@ -3,10 +3,10 @@ using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using TodoListApp.Application.Tasks.DTO;
+using TodoListApp.Application.Boards.DTO;
 using TodoListApp.Core.DomainAccessAbstraction;
 
-namespace TodoListApp.Application.Tasks.Queries
+namespace TodoListApp.Application.Boards.Queries
 {
     public class TasksQueryHandler : IRequestHandler<TasksQuery, List<MainPanelTasksDto>>
     {
