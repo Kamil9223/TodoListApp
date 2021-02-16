@@ -9,7 +9,7 @@ namespace TodoListApp.UnitTests.UsersTests
 {
     public abstract class UserTestBase
     {
-        protected IMapper CreateMapper()
+        protected IMapper CreateMapper()//testowy komentarz
         {
             var configurationProvider = new MapperConfiguration(cfg =>
             {
@@ -22,7 +22,7 @@ namespace TodoListApp.UnitTests.UsersTests
         protected FakeUnitOfWork CreateUnitOfWorkMock(DbContext context, 
             Mock<IUserRepository> userRepositoryMock)
         {
-            return new FakeUnitOfWork(context, userRepositoryMock);//inny
+            return new FakeUnitOfWork(context, userRepositoryMock);//jeszcze jeden
         }
     }
 }
