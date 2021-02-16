@@ -22,7 +22,7 @@ namespace TodoListApp.UnitTests.UsersTests
         protected FakeUnitOfWork CreateUnitOfWorkMock(DbContext context, 
             Mock<IUserRepository> userRepositoryMock)
         {
-            return new FakeUnitOfWork(context, userRepositoryMock);
+            return new FakeUnitOfWork(context, userRepositoryMock);//inny
         }
     }
 }
