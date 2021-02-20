@@ -22,5 +22,12 @@ namespace TodoListApp.Persistance.DataAccess
                 .Where(x => x.Board.TasksBoardId == boardId)
                 .ToListAsync();
         }
+
+        public async Task<SingleTask> GetTaskWithDetails(int taskId)
+        {
+            return await DbContext.Tasks
+                .Include(x => x.Details)
+                .SingleOrDefaultAsync(x => x.SingleTaskId == taskId);
+        }
     }
 }
