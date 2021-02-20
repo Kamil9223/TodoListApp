@@ -1,3 +1,63 @@
 ﻿@model TodoListApp.Application.Tasks.DTO.TaskInfoWithDetailsDto
 
-<p>Task Details</p>
+<div class="container">
+    <div class="row">
+        <div class="col-5 border-right">
+            <dl class="row">
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.TaskName):
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.TaskName)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.CreatedAt):
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.CreatedAt)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.PredictedFinishDate):
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.PredictedFinishDate)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-7">
+            <ul class="list-group">
+                @foreach (var detail in Model.Details)
+                {
+                    <li class="list-group-item bg-light mt-2">
+                        <div class="row">
+                            <div class="col-sm-1 border-right">
+                                <button type="button" id="dropdownDescription" 
+                                        value="@detail.TaskDetailsId">
+                                    <i class="fas fa-2x fa-angle-down"></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-9">
+                                <text>@detail.TaskDetailName</text>
+                            </div>
+                            <div class="col-sm-2">
+                                @if (detail.Done)
+                                {
+                                    <span class="text-info">Done</span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger">Not done</span>
+                                }
+                            </div>
+                        </div>
+
+                        <div id="@detail.TaskDetailsId" class="d-none border-top mt-1">
+                            <span class="dropdown-item">@detail.Description</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>
