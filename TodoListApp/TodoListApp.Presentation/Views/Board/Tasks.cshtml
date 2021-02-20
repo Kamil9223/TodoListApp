@@ -47,7 +47,9 @@
                     }
                 </div>
                 <div class="col-sm justify-content-center">
-                    <button class="btn btn-dark">Details</button>
+                    <form asp-controller="Task" asp-action="TaskDetails" asp-route-id="@task.SingleTaskId" method="get">
+                        <button class="btn btn-dark" type="submit">Details</button>
+                    </form>
                 </div>
             </div>
         </li>

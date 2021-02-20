@@ -16,4 +16,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mapper\DTO\" />
+    <Folder Include="Mapper\Queries\" />
+    <Folder Include="Tasks\" />
+  </ItemGroup>
+
 </Project>
