@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using TodoListApp.Application.Tasks.Queries;
 
 namespace TodoListApp.Presentation.Controllers
 {
@@ -14,9 +16,14 @@ namespace TodoListApp.Presentation.Controllers
             _mediator = mediator;
         }
 
-        public IActionResult TaskDetails(int id)
+        public async Task<IActionResult> TaskDetails(int id)
         {
-            return View();
+            var taskInfo = await _mediator.Send(new TaskDetailsQuery
+            {
+                TaskId = id
+            });
+
+            return View(taskInfo);
         }
     }
 }
