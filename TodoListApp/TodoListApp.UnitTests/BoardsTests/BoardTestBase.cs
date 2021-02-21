@@ -5,9 +5,9 @@ using TodoListApp.Application.Mapper;
 using TodoListApp.Core.DomainAccessAbstraction;
 using TodoListApp.UnitTests.TestData.FakeImplementations;
 
-namespace TodoListApp.UnitTests.UsersTests
+namespace TodoListApp.UnitTests.BoardsTests
 {
-    public abstract class UserTestBase
+    public abstract class BoardTestBase
     {
         protected IMapper CreateMapper()
         {
@@ -19,7 +19,7 @@ namespace TodoListApp.UnitTests.UsersTests
             return configurationProvider.CreateMapper();
         }
 
-        protected FakeUnitOfWork CreateUnitOfWorkMock(DbContext context, 
+        protected FakeUnitOfWork CreateUnitOfWorkMock(DbContext context,
             Mock<IUserRepository> userRepositoryMock,
             Mock<ISingleTaskRepository> tasksRepsitoryMock)
         {

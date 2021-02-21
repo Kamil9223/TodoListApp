@@ -2,22 +2,23 @@
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TodoListApp.Application.Users.Queries;
+using TodoListApp.Application.Boards.Queries;
 using TodoListApp.Core.DomainAccessAbstraction;
 using TodoListApp.UnitTests.TestData.FakeImplementations;
 using TodoListApp.UnitTests.TestData.Mocks;
 using Xunit;
 
-namespace TodoListApp.UnitTests.UsersTests
+namespace TodoListApp.UnitTests.BoardsTests
 {
-    public class ProfileQueryHandlerTest : UserTestBase
+    public class TasksQueryHandlerTest : BoardTestBase
     {
         private readonly IMapper _mapper;
         private readonly FakeUnitOfWork _fakeUnitOfWork;
 
-        public ProfileQueryHandlerTest()
+        public TasksQueryHandlerTest()
         {
             _mapper = CreateMapper();
 
@@ -28,19 +29,19 @@ namespace TodoListApp.UnitTests.UsersTests
         }
 
         [Fact]
-        public async Task Should_returns_correct_mapped_profile_dto()
+        public async Task Should_returns_correct_mapped_list_of_mainPanelTasksDto()
         {
-            var profileQueryHandler = new ProfileQueryHandler(_fakeUnitOfWork, _mapper);
+            var tasksQueryHandler = new TasksQueryHandler(_fakeUnitOfWork, _mapper);
 
-            _fakeUnitOfWork.UsersMock.SetupUser();
+            _fakeUnitOfWork.TasksMock.SetupTasksFromBoard();
 
-            var result = await profileQueryHandler.Handle(new ProfileQuery
+            var result = await tasksQueryHandler.Handle(new TasksQuery
             {
-                userId = 1
+                TasksBoardId = 1
             }, CancellationToken.None);
 
-            result.Email.Should().Be(UserRepositoryTestData.UserEmail);
-            result.Points.Should().Be(11);
+            result.Count.Should().Be(3);
+            result.First().TaskName.Should().Be("sprzątanie pokoju");
         }
     }
 }
