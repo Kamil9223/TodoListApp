@@ -21,9 +21,10 @@ namespace TodoListApp.UnitTests.BoardsTests
 
         protected FakeUnitOfWork CreateUnitOfWorkMock(DbContext context,
             Mock<IUserRepository> userRepositoryMock,
+            Mock<ITasksBoardRepository> tasksBoardRepositoryMock,
             Mock<ISingleTaskRepository> tasksRepsitoryMock)
         {
-            return new FakeUnitOfWork(context, userRepositoryMock, tasksRepsitoryMock);
+            return new FakeUnitOfWork(context, userRepositoryMock, tasksBoardRepositoryMock, tasksRepsitoryMock);
         }
     }
 }

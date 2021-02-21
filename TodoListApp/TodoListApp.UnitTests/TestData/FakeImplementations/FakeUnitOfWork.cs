@@ -10,17 +10,21 @@ namespace TodoListApp.UnitTests.TestData.FakeImplementations
         private readonly DbContext _dbContext;
 
         public IUserRepository Users { get => UsersMock.Object; }
+        public ITasksBoardRepository Boards { get => BoardsMock.Object; }
         public ISingleTaskRepository Tasks { get => TasksMock.Object; }
 
         public Mock<IUserRepository> UsersMock { get; set; }
+        public Mock<ITasksBoardRepository> BoardsMock { get; set; }
         public Mock<ISingleTaskRepository> TasksMock { get; set; }
 
         public FakeUnitOfWork(DbContext dbContext,
             Mock<IUserRepository> usersMock,
+            Mock<ITasksBoardRepository> boardsMock,
             Mock<ISingleTaskRepository> tasksMock)
         {
             _dbContext = dbContext;
             UsersMock = usersMock;
+            BoardsMock = boardsMock;
             TasksMock = tasksMock;
         }
 

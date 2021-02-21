@@ -20,7 +20,7 @@ namespace TodoListApp.Application.Tasks.Queries
 
         public async Task<TaskInfoWithDetailsDto> Handle(TaskDetailsQuery request, CancellationToken cancellationToken)
         {
-            var taskWithDetails = await _unitOfWork.Tasks.GetTaskWithDetails(request.TaskId);
+            var taskWithDetails = await _unitOfWork.Tasks.GetWithDetails(request.TaskId);
 
             return _mapper.Map<TaskInfoWithDetailsDto>(taskWithDetails);
         }

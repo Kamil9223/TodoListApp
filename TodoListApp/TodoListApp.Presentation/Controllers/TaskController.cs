@@ -16,6 +16,17 @@ namespace TodoListApp.Presentation.Controllers
             _mediator = mediator;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Tasks(int taskBoardId)
+        {
+            var tasksCollection = await _mediator.Send(new TasksQuery
+            {
+                TasksBoardId = taskBoardId
+            });
+
+            return PartialView(nameof(Tasks), tasksCollection);
+        }
+
         public async Task<IActionResult> TaskDetails(int id)
         {
             var taskInfo = await _mediator.Send(new TaskDetailsQuery

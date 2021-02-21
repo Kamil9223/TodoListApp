@@ -16,18 +16,18 @@ namespace TodoListApp.Persistance.DataAccess
 
         }
 
-        public async Task<IEnumerable<SingleTask>> GetTasksFromBoard(int boardId)
-        {
-            return await DbContext.Tasks
-                .Where(x => x.Board.TasksBoardId == boardId)
-                .ToListAsync();
-        }
-
-        public async Task<SingleTask> GetTaskWithDetails(int taskId)
+        public async Task<SingleTask> GetWithDetails(int taskId)
         {
             return await DbContext.Tasks
                 .Include(x => x.Details)
                 .SingleOrDefaultAsync(x => x.SingleTaskId == taskId);
+        }
+
+        public async Task<IEnumerable<SingleTask>> GetAll(int boardId)
+        {
+            return await DbContext.Tasks
+               .Where(x => x.Board.TasksBoardId == boardId)
+               .ToListAsync();
         }
     }
 }

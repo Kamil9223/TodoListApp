@@ -24,8 +24,9 @@ namespace TodoListApp.UnitTests.BoardsTests
 
             var dbContext = new Mock<DbContext>();
             var userRepositoryMock = new Mock<IUserRepository>();
+            var tasksBoardRepositoryMock = new Mock<ITasksBoardRepository>();
             var tasksRepositoryMock = new Mock<ISingleTaskRepository>();
-            _fakeUnitOfWork = CreateUnitOfWorkMock(dbContext.Object, userRepositoryMock, tasksRepositoryMock);
+            _fakeUnitOfWork = CreateUnitOfWorkMock(dbContext.Object, userRepositoryMock, tasksBoardRepositoryMock, tasksRepositoryMock);
         }
 
         [Fact]
@@ -33,7 +34,7 @@ namespace TodoListApp.UnitTests.BoardsTests
         {
             var tasksQueryHandler = new TasksQueryHandler(_fakeUnitOfWork, _mapper);
 
-            _fakeUnitOfWork.TasksMock.SetupTasksFromBoard();
+            _fakeUnitOfWork.BoardsMock.SetupTasksFromBoard();
 
             var result = await tasksQueryHandler.Handle(new TasksQuery
             {

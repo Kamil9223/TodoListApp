@@ -23,18 +23,19 @@ namespace TodoListApp.UnitTests.UsersTests
 
             var dbContext = new Mock<DbContext>();
             var userRepositoryMock = new Mock<IUserRepository>();
+            var tasksBoardRepositoryMock = new Mock<ITasksBoardRepository>();
             var tasksRepositoryMock = new Mock<ISingleTaskRepository>();
-            _fakeUnitOfWork = CreateUnitOfWorkMock(dbContext.Object, userRepositoryMock, tasksRepositoryMock);
+            _fakeUnitOfWork = CreateUnitOfWorkMock(dbContext.Object, userRepositoryMock, tasksBoardRepositoryMock, tasksRepositoryMock);
         }
 
         [Fact]
         public async Task Should_returns_correct_mapped_main_panel_dto_when_user_has_at_least_one_board()
         {
-            var userBoardQueryHandler = new UserBoardQueryHandler(_fakeUnitOfWork, _mapper);
+            var userBoardQueryHandler = new BoardQueryHandler(_fakeUnitOfWork, _mapper);
 
             _fakeUnitOfWork.UsersMock.SetupUserWithBoardsAndTasks();
 
-            var result = await userBoardQueryHandler.Handle(new UserBoardQuery
+            var result = await userBoardQueryHandler.Handle(new BoardQuery
             {
                 userId = 1
             }, CancellationToken.None);
@@ -46,11 +47,11 @@ namespace TodoListApp.UnitTests.UsersTests
         [Fact]
         public async Task Should_returns_empty_dto_object_when_user_doesnt_has_boards()
         {
-            var userBoardQueryHandler = new UserBoardQueryHandler(_fakeUnitOfWork, _mapper);
+            var userBoardQueryHandler = new BoardQueryHandler(_fakeUnitOfWork, _mapper);
 
             _fakeUnitOfWork.UsersMock.SetupUserWithoutAnyBoards();
 
-            var result = await userBoardQueryHandler.Handle(new UserBoardQuery
+            var result = await userBoardQueryHandler.Handle(new BoardQuery
             {
                 userId = 1
             }, CancellationToken.None);

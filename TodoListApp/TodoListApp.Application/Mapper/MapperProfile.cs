@@ -13,7 +13,7 @@ namespace TodoListApp.Application.Mapper
         {
             CreateMap<User, ProfileDto>().ReverseMap();
 
-            CreateMap<SingleTask, MainPanelTasksDto>()
+            CreateMap<SingleTask, TaskDto>()
                 .ForMember(dest => dest.PredictedBestBeforeDateExceeded,
                            act => act.MapFrom(src => src.PredictedFinishDate < DateTime.Now))
                 .ReverseMap();

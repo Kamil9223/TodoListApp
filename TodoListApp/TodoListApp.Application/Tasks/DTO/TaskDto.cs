@@ -1,8 +1,8 @@
 ﻿using TodoListApp.Core.Domain;
 
-namespace TodoListApp.Application.Boards.DTO
+namespace TodoListApp.Application.Tasks.DTO
 {
-    public class MainPanelTasksDto
+    public class TaskDto
     {
         public int SingleTaskId { get; set; }
         public string TaskName { get; set; }

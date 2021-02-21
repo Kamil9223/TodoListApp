@@ -1,4 +1,4 @@
-﻿@model TodoListApp.Application.Users.DTO.MainPanelDto
+﻿@model TodoListApp.Application.Boards.DTO.BoardDto
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -33,7 +33,7 @@
         </div>
 
         <div id="dynamicContent" class="col">
-            <partial name="../Board/Tasks" model="@Model.Tasks" />
+            <partial name="../Task/Tasks" model="@Model.Tasks" />
         </div>
 
     </div>

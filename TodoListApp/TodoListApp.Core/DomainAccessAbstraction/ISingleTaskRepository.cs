@@ -6,7 +6,7 @@ namespace TodoListApp.Core.DomainAccessAbstraction
 {
     public interface ISingleTaskRepository : IRepository<SingleTask>
     {
-        Task<IEnumerable<SingleTask>> GetTasksFromBoard(int boardId);
-        Task<SingleTask> GetTaskWithDetails(int taskId);
+        Task<SingleTask> GetWithDetails(int taskId);
+        Task<IEnumerable<SingleTask>> GetAll(int boardId);
     }
 }

@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using System.Collections.Generic;
 using TodoListApp.Application.Boards.DTO;
+using TodoListApp.Application.Tasks.DTO;
 
-namespace TodoListApp.Application.Boards.Queries
+namespace TodoListApp.Application.Tasks.Queries
 {
-    public class TasksQuery : IRequest<List<MainPanelTasksDto>>
+    public class TasksQuery : IRequest<List<TaskDto>>
     {
         public int TasksBoardId { get; set; }
     }

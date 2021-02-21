@@ -4,9 +4,9 @@ using TodoListApp.Core.DomainAccessAbstraction;
 
 namespace TodoListApp.UnitTests.TestData.Mocks
 {
-    public static class SingleTaskRepositoryMockExtension
+    public static class TasksBoardRepositoryMockExtension
     {
-        public static Mock<ISingleTaskRepository> SetupTasksFromBoard(this Mock<ISingleTaskRepository> repositoryMock)
+        public static Mock<ITasksBoardRepository> SetupTasksFromBoard(this Mock<ITasksBoardRepository> repositoryMock)
         {
             repositoryMock.Setup(x => x.GetTasksFromBoard(It.IsAny<int>()))
                 .Returns(Task.FromResult(SingleTaskRepositoryTestData.CreateTasks()));

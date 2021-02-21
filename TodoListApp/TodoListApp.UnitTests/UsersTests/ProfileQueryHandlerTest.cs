@@ -23,8 +23,9 @@ namespace TodoListApp.UnitTests.UsersTests
 
             var dbContext = new Mock<DbContext>();
             var userRepositoryMock = new Mock<IUserRepository>();
+            var tasksBoardRepositoryMock = new Mock<ITasksBoardRepository>();
             var tasksRepositoryMock = new Mock<ISingleTaskRepository>();
-            _fakeUnitOfWork = CreateUnitOfWorkMock(dbContext.Object, userRepositoryMock, tasksRepositoryMock);
+            _fakeUnitOfWork = CreateUnitOfWorkMock(dbContext.Object, userRepositoryMock, tasksBoardRepositoryMock, tasksRepositoryMock);
         }
 
         [Fact]

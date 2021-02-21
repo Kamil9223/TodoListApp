@@ -9,13 +9,17 @@ namespace TodoListApp.Persistance.DataAccess
         private readonly TodoTasksContext _todoTasksContext;
 
         public IUserRepository Users { get; }
+        public ITasksBoardRepository Boards { get; }
         public ISingleTaskRepository Tasks { get; }
 
-        public UnitOfWork(TodoTasksContext todoTasksContext, IUserRepository users, 
+        public UnitOfWork(TodoTasksContext todoTasksContext,
+            IUserRepository users,
+            ITasksBoardRepository boards,
             ISingleTaskRepository tasks)
         {
             _todoTasksContext = todoTasksContext;
             Users = users;
+            Boards = boards;
             Tasks = tasks;
         }
 

@@ -5,7 +5,7 @@
 
 //służy do załadowania widoku częściowego zawierającego listę tasków na wybranym boardzie
 $('#sideMenu button').click(function () {
-    $('#dynamicContent').load("Board/Tasks", { "taskBoardId": $(this).val() });
+    $('#dynamicContent').load("Task/Tasks", { "taskBoardId": $(this).val() });
 });
 
 //służy do pokazania/ukrycia opisu konkretnego szczegółu taska

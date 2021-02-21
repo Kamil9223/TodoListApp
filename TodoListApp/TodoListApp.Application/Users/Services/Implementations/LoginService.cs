@@ -25,7 +25,7 @@ namespace TodoListApp.Application.Users.Services.Implementations
 
         public async Task LogIn(LoginUserCommand command)
         {
-            var user = await _unitOfWork.Users.GetByEmail(command.Email);
+            var user = await _unitOfWork.Users.Get(command.Email);
             if (user == null)
                 throw new InvalidCredentialsException();
 

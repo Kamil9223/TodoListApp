@@ -23,7 +23,7 @@ namespace TodoListApp.IntegrationTests.DatabaseIntegration.Tests
         [Fact]
         public async Task Should_returns_user_by_email()
         {
-            var user = await _userRepository.GetByEmail("testEmail");
+            var user = await _userRepository.Get("testEmail");
 
             user.Should().NotBeNull();
             user.Email.Should().Be("testEmail");
@@ -32,7 +32,7 @@ namespace TodoListApp.IntegrationTests.DatabaseIntegration.Tests
         [Fact]
         public async Task Should_returns_user_with_boards_and_tasks()
         {
-            var userWithBoards = await _userRepository.GetUserWithBoards(1);
+            var userWithBoards = await _userRepository.GetWithBoardsAndTasks(1);
 
             userWithBoards.Should().NotBeNull();
             userWithBoards.Boards.Should().HaveCount(2);

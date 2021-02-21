@@ -24,7 +24,7 @@ namespace TodoListApp.Application.Users.Services.Implementations
             if (command.Password != command.ConfirmedPassword)
                 throw new InvalidCredentialsException("Confirmed password is different than password", "");
 
-            var existedUser = await _unitOfWork.Users.GetByEmail(command.Email);
+            var existedUser = await _unitOfWork.Users.Get(command.Email);
             if (existedUser != null)
                 throw new AlreadyExistsException();
 

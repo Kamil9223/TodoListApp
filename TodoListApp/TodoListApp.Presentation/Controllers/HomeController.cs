@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using TodoListApp.Application.Users.Queries;
+using TodoListApp.Application.Boards.Queries;
 
 namespace TodoListApp.Presentation.Controllers
 {
@@ -23,7 +23,7 @@ namespace TodoListApp.Presentation.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var mainPanel = await _mediator.Send(new UserBoardQuery
+            var mainPanel = await _mediator.Send(new BoardQuery
             {
                 userId = Convert.ToInt32(
                     HttpContext.User.Claims.Where(x => x.Type == "Id").First().Value)
