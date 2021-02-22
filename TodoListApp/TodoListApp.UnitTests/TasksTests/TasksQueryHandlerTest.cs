@@ -1,19 +1,16 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using Moq;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TodoListApp.Application.Boards.Queries;
-using TodoListApp.Core.DomainAccessAbstraction;
+using TodoListApp.Application.Tasks.Queries;
 using TodoListApp.UnitTests.TestData.FakeImplementations;
 using TodoListApp.UnitTests.TestData.Mocks;
 using Xunit;
 
-namespace TodoListApp.UnitTests.BoardsTests
+namespace TodoListApp.UnitTests.TasksTests
 {
-    public class TasksQueryHandlerTest : BoardTestBase
+    public class TasksQueryHandlerTest : TestBase
     {
         private readonly IMapper _mapper;
         private readonly FakeUnitOfWork _fakeUnitOfWork;
@@ -21,20 +18,15 @@ namespace TodoListApp.UnitTests.BoardsTests
         public TasksQueryHandlerTest()
         {
             _mapper = CreateMapper();
-
-            var dbContext = new Mock<DbContext>();
-            var userRepositoryMock = new Mock<IUserRepository>();
-            var tasksBoardRepositoryMock = new Mock<ITasksBoardRepository>();
-            var tasksRepositoryMock = new Mock<ISingleTaskRepository>();
-            _fakeUnitOfWork = CreateUnitOfWorkMock(dbContext.Object, userRepositoryMock, tasksBoardRepositoryMock, tasksRepositoryMock);
+            _fakeUnitOfWork = CreateUnitOfWorkMock();
         }
 
         [Fact]
-        public async Task Should_returns_correct_mapped_list_of_mainPanelTasksDto()
+        public async Task Should_returns_correct_mapped_list_of_taskDto()
         {
             var tasksQueryHandler = new TasksQueryHandler(_fakeUnitOfWork, _mapper);
 
-            _fakeUnitOfWork.BoardsMock.SetupTasksFromBoard();
+            _fakeUnitOfWork.TasksMock.SetupTasks();
 
             var result = await tasksQueryHandler.Handle(new TasksQuery
             {

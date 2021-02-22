@@ -1,39 +1,31 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using Moq;
 using System.Threading;
 using System.Threading.Tasks;
-using TodoListApp.Application.Users.Queries;
-using TodoListApp.Core.DomainAccessAbstraction;
+using TodoListApp.Application.Boards.Queries;
 using TodoListApp.UnitTests.TestData.FakeImplementations;
 using TodoListApp.UnitTests.TestData.Mocks;
 using Xunit;
 
-namespace TodoListApp.UnitTests.UsersTests
+namespace TodoListApp.UnitTests.BoardsTests
 {
-    public class UserBoardQueryHandlerTest : UserTestBase
+    public class BoardQueryHandlerTest : TestBase
     {
         private readonly IMapper _mapper;
         private readonly FakeUnitOfWork _fakeUnitOfWork;
 
-        public UserBoardQueryHandlerTest()
+        public BoardQueryHandlerTest()
         {
             _mapper = CreateMapper();
-
-            var dbContext = new Mock<DbContext>();
-            var userRepositoryMock = new Mock<IUserRepository>();
-            var tasksBoardRepositoryMock = new Mock<ITasksBoardRepository>();
-            var tasksRepositoryMock = new Mock<ISingleTaskRepository>();
-            _fakeUnitOfWork = CreateUnitOfWorkMock(dbContext.Object, userRepositoryMock, tasksBoardRepositoryMock, tasksRepositoryMock);
+            _fakeUnitOfWork = CreateUnitOfWorkMock();
         }
 
         [Fact]
-        public async Task Should_returns_correct_mapped_main_panel_dto_when_user_has_at_least_one_board()
+        public async Task Should_returns_correct_mapped_boardDto_when_user_has_at_least_one_board()
         {
             var userBoardQueryHandler = new BoardQueryHandler(_fakeUnitOfWork, _mapper);
 
-            _fakeUnitOfWork.UsersMock.SetupUserWithBoardsAndTasks();
+            _fakeUnitOfWork.BoardsMock.SetupBoardsWithTasks();
 
             var result = await userBoardQueryHandler.Handle(new BoardQuery
             {
@@ -49,7 +41,7 @@ namespace TodoListApp.UnitTests.UsersTests
         {
             var userBoardQueryHandler = new BoardQueryHandler(_fakeUnitOfWork, _mapper);
 
-            _fakeUnitOfWork.UsersMock.SetupUserWithoutAnyBoards();
+            _fakeUnitOfWork.BoardsMock.SetupEmptyBoardsList();
 
             var result = await userBoardQueryHandler.Handle(new BoardQuery
             {

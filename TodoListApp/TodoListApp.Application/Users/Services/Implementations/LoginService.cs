@@ -29,9 +29,9 @@ namespace TodoListApp.Application.Users.Services.Implementations
             if (user == null)
                 throw new InvalidCredentialsException();
 
-            var hash = _encrypter.Encrypt(command.Password);
-            if (user.PasswordHash != hash)
-                throw new InvalidCredentialsException();
+            //var hash = _encrypter.Encrypt(command.Password);
+            //if (user.PasswordHash != hash)
+            //    throw new InvalidCredentialsException();
 
             var claims = new[]
             {

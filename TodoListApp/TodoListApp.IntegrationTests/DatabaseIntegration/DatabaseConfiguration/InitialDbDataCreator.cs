@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.IO;
 using TodoListApp.Persistance.Context;
 

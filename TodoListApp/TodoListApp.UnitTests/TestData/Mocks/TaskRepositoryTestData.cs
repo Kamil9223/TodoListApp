@@ -4,7 +4,7 @@ using TodoListApp.Core.Domain;
 
 namespace TodoListApp.UnitTests.TestData.Mocks
 {
-    public class SingleTaskRepositoryTestData
+    public class TaskRepositoryTestData
     {
         public static IEnumerable<SingleTask> CreateTasks()
         {

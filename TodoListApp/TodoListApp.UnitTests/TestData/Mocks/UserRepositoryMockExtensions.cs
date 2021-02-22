@@ -13,21 +13,5 @@ namespace TodoListApp.UnitTests.TestData.Mocks
 
             return repositoryMock;
         }
-
-        public static Mock<IUserRepository> SetupUserWithBoardsAndTasks(this Mock<IUserRepository> repositoryMock)
-        {
-            repositoryMock.Setup(x => x.GetWithBoardsAndTasks(It.IsAny<int>()))
-                .Returns(Task.FromResult(UserRepositoryTestData.CreateUserWithBoardsAndTasks()));
-
-            return repositoryMock;
-        }
-
-        public static Mock<IUserRepository> SetupUserWithoutAnyBoards(this Mock<IUserRepository> repositoryMock)
-        {
-            repositoryMock.Setup(x => x.GetWithBoardsAndTasks(It.IsAny<int>()))
-                .Returns(Task.FromResult(UserRepositoryTestData.CreateUser()));
-
-            return repositoryMock;
-        }
     }
 }

@@ -1,18 +1,15 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using Moq;
 using System.Threading;
 using System.Threading.Tasks;
 using TodoListApp.Application.Users.Queries;
-using TodoListApp.Core.DomainAccessAbstraction;
 using TodoListApp.UnitTests.TestData.FakeImplementations;
 using TodoListApp.UnitTests.TestData.Mocks;
 using Xunit;
 
 namespace TodoListApp.UnitTests.UsersTests
 {
-    public class ProfileQueryHandlerTest : UserTestBase
+    public class ProfileQueryHandlerTest : TestBase
     {
         private readonly IMapper _mapper;
         private readonly FakeUnitOfWork _fakeUnitOfWork;
@@ -20,16 +17,11 @@ namespace TodoListApp.UnitTests.UsersTests
         public ProfileQueryHandlerTest()
         {
             _mapper = CreateMapper();
-
-            var dbContext = new Mock<DbContext>();
-            var userRepositoryMock = new Mock<IUserRepository>();
-            var tasksBoardRepositoryMock = new Mock<ITasksBoardRepository>();
-            var tasksRepositoryMock = new Mock<ISingleTaskRepository>();
-            _fakeUnitOfWork = CreateUnitOfWorkMock(dbContext.Object, userRepositoryMock, tasksBoardRepositoryMock, tasksRepositoryMock);
+            _fakeUnitOfWork = CreateUnitOfWorkMock();
         }
 
         [Fact]
-        public async Task Should_returns_correct_mapped_profile_dto()
+        public async Task Should_returns_correct_mapped_profileDto()
         {
             var profileQueryHandler = new ProfileQueryHandler(_fakeUnitOfWork, _mapper);
 
