@@ -13,5 +13,13 @@ namespace TodoListApp.UnitTests.TestData.Mocks
 
             return repositoryMock;
         }
+
+        public static Mock<ISingleTaskRepository> SetupTaskDetails(this Mock<ISingleTaskRepository> repositoryMock)
+        {
+            repositoryMock.Setup(x => x.GetWithDetails(It.IsAny<int>()))
+                .Returns(Task.FromResult(TaskRepositoryTestData.CreateTaskWithDetails()));
+
+            return repositoryMock;
+        }
     }
 }

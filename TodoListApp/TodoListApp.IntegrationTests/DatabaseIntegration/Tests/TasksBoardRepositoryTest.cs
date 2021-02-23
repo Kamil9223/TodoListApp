@@ -29,5 +29,13 @@ namespace TodoListApp.IntegrationTests.DatabaseIntegration.Tests
             boards.Should().HaveCount(2);
             boards.First().Tasks.Should().HaveCount(2);
         }
+
+        [Fact]
+        public async Task Should_returns_empty_list_when_does_not_exist_any_board()
+        {
+            var boards = await _boardRepository.GetAllWithTasks(99999);
+
+            boards.Should().BeEmpty();
+        }
     }
 }

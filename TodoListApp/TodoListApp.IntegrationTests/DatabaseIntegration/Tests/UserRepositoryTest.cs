@@ -27,5 +27,13 @@ namespace TodoListApp.IntegrationTests.DatabaseIntegration.Tests
             user.Should().NotBeNull();
             user.Email.Should().Be("testEmail");
         }
+
+        [Fact]
+        public async Task Should_returns_null_when_user_does_not_exist()
+        {
+            var user = await _userRepository.Get("NotExistedEmail");
+
+            user.Should().BeNull();
+        }
     }
 }

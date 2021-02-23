@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore.Internal;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using TodoListApp.Application.Boards.Queries;
@@ -34,6 +36,11 @@ namespace TodoListApp.UnitTests.BoardsTests
 
             result.Tasks.Should().HaveCount(3);
             result.Categories.Should().HaveCount(2);
+            result.Categories.Should().Contain(new Dictionary<int, string>
+            {
+                { 1, "ogólne" },
+                { 2, "programowanie" }
+            });
         }
 
         [Fact]
