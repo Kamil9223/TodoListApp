@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TodoListApp.Infrastructure\TodoListApp.Infrastructure.csproj" />
     <ProjectReference Include="..\TodoListApp.Persistance\TodoListApp.Persistance.csproj" />
   </ItemGroup>
 

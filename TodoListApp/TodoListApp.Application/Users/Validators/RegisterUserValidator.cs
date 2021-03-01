@@ -1,17 +1,22 @@
 ﻿using FluentValidation;
 using TodoListApp.Application.Users.Commands;
 
-namespace TodoListApp.Infrastructure.API.Validators
+namespace TodoListApp.Application.Users.Validators
 {
-    public class LoginUserValidator : AbstractValidator<LoginUserCommand>
+    public class RegisterUserValidator : AbstractValidator<RegisterUserCommand>
     {
-        public LoginUserValidator()
+        public RegisterUserValidator()
         {
             RuleFor(x => x.Email)
                 .EmailAddress()
                 .MaximumLength(80);
 
             RuleFor(x => x.Password)
+                .MinimumLength(5)
+                .MaximumLength(20)
+                .NotNull();
+
+            RuleFor(x => x.ConfirmedPassword)
                 .MinimumLength(5)
                 .MaximumLength(20)
                 .NotNull();
