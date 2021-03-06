@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using TodoListApp.Application.Boards.Commands;
 using TodoListApp.Application.Boards.Queries;
 
 namespace TodoListApp.Presentation.Controllers
@@ -30,6 +31,22 @@ namespace TodoListApp.Presentation.Controllers
             });
 
             return View(mainPanel);
+        }
+
+        public IActionResult AddBoard()
+        {
+            return PartialView("AddBoardPartial");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddBoard(AddBoardCommand command)
+        {
+            command.userId = Convert.ToInt32(
+                    HttpContext.User.Claims.Where(x => x.Type == "Id").First().Value);
+
+            await _mediator.Send(command);
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

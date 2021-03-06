@@ -25,12 +25,15 @@
             }
 
             <hr />
-            <form>
-                <div class="d-flex justify-content-center">
-                    <button class="btn btn-dark" type="submit">New Category</button>
-                </div>   
-            </form>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-dark" type="button" data-toggle="ajax-modal"
+                        data-url="@Url.Action("AddBoard")">
+                    New Category
+                </button>
+            </div>   
         </div>
+
+        <div id="dynamicContentForAddingBoardModal"></div>
 
         <div id="dynamicContent" class="col">
             <partial name="../Task/Tasks" model="@Model.Tasks" />

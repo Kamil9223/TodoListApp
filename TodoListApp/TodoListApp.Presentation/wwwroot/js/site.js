@@ -17,3 +17,15 @@ $('#dropdownDescription').click(function () {
         $('#' + $(this).val()).addClass('d-none');
     }
 });
+
+//służy do otwarcia okna do dodawania boardów
+$('button[data-toggle="ajax-modal"]').click(function () {
+    let contentDiv = $('#dynamicContentForAddingBoardModal');
+    let url = $(this).data('url');
+
+    $.get(url).done(function (data) {
+        contentDiv.html(data);
+        contentDiv.find('.modal').modal('show');
+    })
+
+});
