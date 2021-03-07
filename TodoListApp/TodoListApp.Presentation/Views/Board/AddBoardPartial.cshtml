@@ -10,20 +10,20 @@
                 </button>
             </div>
 
-            <form asp-action="AddBoard" method="post">
-                <div class="modal-body">
-                    <div class="form-group">
+            <div class="modal-body">
+                <div class="form-group">
+                    <form action="@Url.Action("AddBoard")">
                         <label asp-for="categoryName"></label>
                         <input asp-for="categoryName" class="form-control" />
                         <span asp-validation-for="categoryName" class="text-danger"></span>
-                    </div>
+                    </form>
                 </div>
+            </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-dark" data-save="modal">Save</button>
-                </div>
-            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark" data-save="modal">Save</button>
+            </div>
         </div>
     </div>
 </div>

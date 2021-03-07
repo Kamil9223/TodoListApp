@@ -18,14 +18,37 @@ $('#dropdownDescription').click(function () {
     }
 });
 
+var contentDiv = $('#dynamicContentForAddingBoardModal');
+
 //służy do otwarcia okna do dodawania boardów
 $('button[data-toggle="ajax-modal"]').click(function () {
-    let contentDiv = $('#dynamicContentForAddingBoardModal');
     let url = $(this).data('url');
 
     $.get(url).done(function (data) {
         contentDiv.html(data);
         contentDiv.find('.modal').modal('show');
     })
+});
 
+//służy do wysyłki formularza dodania boardu, oraz do reakcji co ma się stać po wysłaniu,
+//w zależności czy dane były podane w sposób prawidłowy cz nie
+contentDiv.on('click', '[data-save="modal"]', function () {
+    var form = $(this).parents('.modal').find('form');
+    var actionUrl = form.attr('action');
+    var dataToSend = form.serialize();
+    $.post(actionUrl, dataToSend).done(function (data) {
+
+        if (data == 'Redirect!') {
+            contentDiv.find('.modal').modal('hide');
+            $.get('Board/Redirect');
+            location.reload(true);
+        }
+        else {
+            contentDiv.find('.modal').removeClass('fade');
+            contentDiv.find('.modal').modal('hide');
+            contentDiv.html(data);
+            contentDiv.find('.modal').addClass('fade');
+            contentDiv.find('.modal').modal('show');
+        }
+    });
 });

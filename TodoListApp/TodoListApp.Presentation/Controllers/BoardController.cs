@@ -11,12 +11,12 @@ using TodoListApp.Application.Boards.Queries;
 namespace TodoListApp.Presentation.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class BoardController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<BoardController> _logger;
         private readonly IMediator _mediator;
 
-        public HomeController(ILogger<HomeController> logger, IMediator mediator)
+        public BoardController(ILogger<BoardController> logger, IMediator mediator)
         {
             _logger = logger;
             _mediator = mediator;
@@ -41,11 +41,19 @@ namespace TodoListApp.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBoard(AddBoardCommand command)
         {
+            if (!ModelState.IsValid)
+                return PartialView("AddBoardPartial");
+
             command.userId = Convert.ToInt32(
                     HttpContext.User.Claims.Where(x => x.Type == "Id").First().Value);
 
             await _mediator.Send(command);
 
+            return new JsonResult("Redirect!");
+        }
+
+        public IActionResult Redirect()
+        {
             return RedirectToAction(nameof(Index));
         }
 

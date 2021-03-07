@@ -57,7 +57,9 @@ namespace TodoListApp.Presentation
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Board}/{action=Index}/{id?}");
             });
         }
     }
