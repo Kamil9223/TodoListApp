@@ -20,12 +20,12 @@ namespace TodoListApp.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> Tasks(int taskBoardId)
         {
-            var tasksCollection = await _mediator.Send(new TasksQuery
+            var taskViewModel = await _mediator.Send(new TasksQuery
             {
                 TasksBoardId = taskBoardId
             });
 
-            return PartialView(nameof(Tasks), tasksCollection);
+            return PartialView(nameof(Tasks), taskViewModel);
         }
 
         public async Task<IActionResult> TaskDetails(int id)
@@ -39,17 +39,18 @@ namespace TodoListApp.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTask(AddTaskCommand command)
+        public async Task<IActionResult> AddTask(AddTaskCommand command, int boardId)
         {
             if (!ModelState.IsValid)
                 return View();
 
+            command.BoardId = boardId;
             await _mediator.Send(command);
 
             return RedirectToAction("Index", "Board");
         }
 
-        public IActionResult AddTask()
+        public IActionResult AddTask(int boardId)
         {
             return View();
         }

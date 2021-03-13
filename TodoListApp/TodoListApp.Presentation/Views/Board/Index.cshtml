@@ -36,7 +36,12 @@
         <div id="dynamicContentForAddingBoardModal"></div>
 
         <div id="dynamicContent" class="col">
-            <partial name="../Task/Tasks" model="@Model.Tasks" />
+            <partial name="../Task/Tasks"
+                     model="@new TodoListApp.Application.Tasks.ViewModels.TasksViewModel
+                            {
+                                Tasks = Model.Tasks,
+                                BoardId = Model.Categories.FirstOrDefault().Key
+                            }" />
         </div>
 
     </div>
