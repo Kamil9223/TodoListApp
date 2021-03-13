@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TodoListApp.Application.Tasks.Commands;
 using TodoListApp.Application.Tasks.Queries;
 
 namespace TodoListApp.Presentation.Controllers
@@ -35,6 +36,22 @@ namespace TodoListApp.Presentation.Controllers
             });
 
             return View(taskInfo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddTask(AddTaskCommand command)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            await _mediator.Send(command);
+
+            return RedirectToAction("Index", "Board");
+        }
+
+        public IActionResult AddTask()
+        {
+            return View();
         }
     }
 }
