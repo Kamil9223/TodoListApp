@@ -17,8 +17,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Tasks\Validators\" />
-  </ItemGroup>
-
 </Project>

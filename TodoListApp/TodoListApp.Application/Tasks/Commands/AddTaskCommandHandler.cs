@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using TodoListApp.Core.Domain;
@@ -17,9 +18,11 @@ namespace TodoListApp.Application.Tasks.Commands
 
         public async Task<Unit> Handle(AddTaskCommand request, CancellationToken cancellationToken)
         {
+            var createdAt = DateTime.Now;
+
             var newTask = new SingleTask(
                 request.TaskName,
-                request.CreatedAt,
+                createdAt,
                 request.PredictedFinishDate,
                 request.Priority);
 
