@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using System.Linq;
 using System.Threading.Tasks;
+using TodoListApp.Core.Domain;
 using TodoListApp.Core.DomainAccessAbstraction;
 using TodoListApp.IntegrationTests.DatabaseIntegration.DatabaseConfiguration;
 using TodoListApp.Persistance.DataAccess;
@@ -13,11 +14,20 @@ namespace TodoListApp.IntegrationTests.DatabaseIntegration.Tests
     {
         private readonly DatabaseFixture _databaseFixture;
         private readonly ITasksBoardRepository _boardRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public TasksBoardRepositoryTest(DatabaseFixture databaseFixture)
         {
             _databaseFixture = databaseFixture;
             _boardRepository = new TasksBoardRepository(_databaseFixture.TodoTasksContext);
+            _userRepository = new UserRepository(_databaseFixture.TodoTasksContext);
+
+            _unitOfWork = new UnitOfWork(
+                _databaseFixture.TodoTasksContext,
+                _userRepository,
+                _boardRepository,
+                null);
         }
 
         [Fact]
@@ -36,6 +46,31 @@ namespace TodoListApp.IntegrationTests.DatabaseIntegration.Tests
             var boards = await _boardRepository.GetAllWithTasks(99999);
 
             boards.Should().BeEmpty();
+        }
+
+        [Fact]
+        public async Task Should_add_board_to_existing_user()
+        {
+            var board = new TasksBoard("newCategory");
+
+            var existingUser = await _unitOfWork.Users.Get(1);
+            existingUser.Boards.Add(board);
+            await _unitOfWork.Complete();
+
+            board.TasksBoardId.Should().NotBe(default);
+            board.User.Should().NotBeNull();
+
+            Clear(board);
+        }
+
+        /// <summary>
+        /// Clear test database from added entities during tests
+        /// </summary>
+        /// <param name="tasksBoard"></param>
+        private void Clear(TasksBoard tasksBoard)
+        {
+            _databaseFixture.TodoTasksContext.Boards.Remove(tasksBoard);
+            _databaseFixture.TodoTasksContext.SaveChanges();
         }
     }
 }

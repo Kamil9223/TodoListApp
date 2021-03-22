@@ -23,12 +23,12 @@ namespace TodoListApp.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             var applicationLayerAssembly = Assembly.Load("TodoListApp.Application");
-            var infrastructureLayerAssembly = Assembly.Load("TodoListApp.Infrastructure");
+            //var infrastructureLayerAssembly = Assembly.Load("TodoListApp.Infrastructure");
 
             services.AddControllersWithViews()
                 .AddApplicationPart(applicationLayerAssembly)
                 .AddFluentValidation(x => 
-                    x.RegisterValidatorsFromAssembly(infrastructureLayerAssembly));
+                    x.RegisterValidatorsFromAssembly(applicationLayerAssembly));
 
             services.AddPersistence(Configuration);
             services.AddApplication();
@@ -57,7 +57,9 @@ namespace TodoListApp.Presentation
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Board}/{action=Index}/{id?}");
             });
         }
     }

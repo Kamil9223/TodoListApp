@@ -9,21 +9,30 @@
         <i class="fa fa-8x fa-user-circle"></i>
     </div>
     <div class="bg-light text-center d-flex justify-content-center p-2">
-        <form asp-action="Register" method="post">
-            <div class="form-group">
-                <input asp-for="Email" type="text" class="form-control" id="email" name="email" placeholder="Enter your email">
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="Password" type="password" class="form-control" name="password" id="password" placeholder="Password">
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="ConfirmedPassword" type="password" class="form-control" name="confirmedPassword" id="confirmPassword" placeholder="Confirm password">
-                <span asp-validation-for="ConfirmedPassword" class="text-danger"></span>
+        <form asp-action="Register" method="post" class="w-100">
+            <div class="form-group w-25 mx-auto">
+                <input asp-for="Email" type="text" class="form-control" id="email" name="email" placeholder="Email">
             </div>
             <div>
-                <button class="btn btn-primary" type="submit">Register</button>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+     
+            <div class="form-group w-25 mx-auto">
+                <input asp-for="Password" type="password" class="form-control" name="password" id="password" placeholder="Hasło">
+            </div>
+            <div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group w-25 mx-auto">
+                <input asp-for="ConfirmedPassword" type="password" class="form-control" name="confirmedPassword" id="confirmPassword" placeholder="Potwierdź hasło">
+            </div>
+            <div>
+                <span asp-validation-for="ConfirmedPassword" class="text-danger"></span>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="submit">Zarejestruj</button>
             </div>
         </form>
     </div>

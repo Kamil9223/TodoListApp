@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using TodoListApp.Application.Tasks.DTO;
+using TodoListApp.Application.Tasks.ViewModels;
 using TodoListApp.Core.DomainAccessAbstraction;
 
 namespace TodoListApp.Application.Tasks.Queries
 {
-    public class TasksQueryHandler : IRequestHandler<TasksQuery, List<TaskDto>>
+    public class TasksQueryHandler : IRequestHandler<TasksQuery, TasksViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -19,7 +20,7 @@ namespace TodoListApp.Application.Tasks.Queries
             _mapper = mapper;
         }
 
-        public async Task<List<TaskDto>> Handle(TasksQuery request, CancellationToken cancellationToken)
+        public async Task<TasksViewModel> Handle(TasksQuery request, CancellationToken cancellationToken)
         {
             var tasks = await _unitOfWork.Tasks.GetAll(request.TasksBoardId);
             var result = new List<TaskDto>();
@@ -29,7 +30,11 @@ namespace TodoListApp.Application.Tasks.Queries
                 result.Add(_mapper.Map<TaskDto>(task));
             }
 
-            return result;
+            return new TasksViewModel
+            {
+                BoardId = request.TasksBoardId,
+                Tasks = result
+            };
         }
     }
 }

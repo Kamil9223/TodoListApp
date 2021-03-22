@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TodoListApp.Application.Tasks.Commands;
 using TodoListApp.Application.Tasks.Queries;
 
 namespace TodoListApp.Presentation.Controllers
@@ -19,12 +20,12 @@ namespace TodoListApp.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> Tasks(int taskBoardId)
         {
-            var tasksCollection = await _mediator.Send(new TasksQuery
+            var taskViewModel = await _mediator.Send(new TasksQuery
             {
                 TasksBoardId = taskBoardId
             });
 
-            return PartialView(nameof(Tasks), tasksCollection);
+            return PartialView(nameof(Tasks), taskViewModel);
         }
 
         public async Task<IActionResult> TaskDetails(int id)
@@ -35,6 +36,34 @@ namespace TodoListApp.Presentation.Controllers
             });
 
             return View(taskInfo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddTask(AddTaskCommand command, int boardId)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            command.BoardId = boardId;
+            await _mediator.Send(command);
+
+            return RedirectToAction("Index", "Board");
+        }
+
+        public IActionResult AddTask(int boardId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int taskId)
+        {
+            await _mediator.Send(new RemoveTaskCommand
+            {
+                TaskId = taskId
+            });
+
+            return RedirectToAction("Index", "Board");
         }
     }
 }

@@ -1,0 +1,43 @@
+﻿@model TodoListApp.Application.Tasks.Commands.AddTaskCommand
+
+@{
+    ViewData["Title"] = "AddTask";
+}
+
+<h1>Dodaj zadanie</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddTask" asp-route-boardId="@Context.Request.Query["boardId"]" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TaskName" class="control-label">Nazwa:</label>
+                <input asp-for="TaskName" class="form-control" />
+                <span asp-validation-for="TaskName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PredictedFinishDate" class="control-label">Przewidywana data ukończenia zadania:</label>
+                <input type="datetime" asp-for="PredictedFinishDate" class="form-control" />
+                <span asp-validation-for="PredictedFinishDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Priority" class="control-label">Priorytet:</label>
+                <select asp-for="Priority">
+                    <option value=@TodoListApp.Core.Domain.PriorityLevel.Low>Niski</option>
+                    <option value=@TodoListApp.Core.Domain.PriorityLevel.Medium>Średni</option>
+                    <option value=@TodoListApp.Core.Domain.PriorityLevel.High>Wysoki</option>
+                </select>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

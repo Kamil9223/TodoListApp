@@ -49,7 +49,7 @@ namespace TodoListApp.Presentation.Controllers
 
             await _mediator.Send(command);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Board");
         }
 
         [Authorize]

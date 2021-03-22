@@ -1,18 +1,24 @@
-﻿@model List<TodoListApp.Application.Tasks.DTO.TaskDto>
+﻿@model TodoListApp.Application.Tasks.ViewModels.TasksViewModel
 
-@if (!Model.Any())
+<div class="row">
+    <div>
+        <a class="btn btn-dark" asp-action="AddTask" asp-controller="Task"
+           asp-route-boardId="@Model.BoardId">Dodaj Zadanie</a>
+    </div>
+</div>
+@if (!Model.Tasks.Any())
 {
-    <h1>Tasks list is empty</h1>
+    <h1>Lista zadań jest pusta</h1>
 }
 <ul class="list-group">
-    @foreach (var task in Model)
+    @foreach (var task in Model.Tasks)
     {
         <li class="list-group-item bg-light mt-2">
             <div class="row">
                 <div class="col-sm-4">
                     <text>@task.TaskName</text>
                 </div>
-                <div class="col-sm">
+                <div class="col-sm-3">
                     @{
                         switch (task.Priority)
                         {
@@ -48,11 +54,15 @@
                 </div>
                 <div class="col-sm justify-content-center">
                     <form asp-controller="Task" asp-action="TaskDetails" asp-route-id="@task.SingleTaskId" method="get">
-                        <button class="btn btn-dark" type="submit">Details</button>
+                        <button class="btn btn-dark" type="submit">Szczegóły</button>
+                    </form>
+                </div>
+                <div class="col-sm justify-content-center">
+                    <form asp-controller="Task" asp-action="Delete" asp-route-taskId="@task.SingleTaskId" method="post">
+                        <button class="btn btn-dark" type="submit">Usuń</button>
                     </form>
                 </div>
             </div>
         </li>
     }
 </ul>
-
