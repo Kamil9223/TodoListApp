@@ -54,5 +54,16 @@ namespace TodoListApp.Presentation.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int taskId)
+        {
+            await _mediator.Send(new RemoveTaskCommand
+            {
+                TaskId = taskId
+            });
+
+            return RedirectToAction("Index", "Board");
+        }
     }
 }
