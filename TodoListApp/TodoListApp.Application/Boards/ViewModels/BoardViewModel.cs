@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using TodoListApp.Application.Tasks.DTO;
 
-namespace TodoListApp.Application.Boards.DTO
+namespace TodoListApp.Application.Boards.ViewModels
 {
-    public class BoardDto
+    public class BoardViewModel
     {
         public Dictionary<int, string> Categories { get; set; }
         public List<TaskDto> Tasks { get; set; }

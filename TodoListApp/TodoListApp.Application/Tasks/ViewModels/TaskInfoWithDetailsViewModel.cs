@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using TodoListApp.Application.Tasks.DTO;
 
-namespace TodoListApp.Application.Tasks.DTO
+namespace TodoListApp.Application.Tasks.ViewModels
 {
-    public class TaskInfoWithDetailsDto
+    public class TaskInfoWithDetailsViewModel
     {
         public int SingleTaskId { get; set; }
         public string TaskName { get; set; }

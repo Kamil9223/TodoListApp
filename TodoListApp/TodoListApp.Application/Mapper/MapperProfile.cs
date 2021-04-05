@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using System;
-using TodoListApp.Application.Boards.DTO;
 using TodoListApp.Application.Tasks.DTO;
-using TodoListApp.Application.Users.DTO;
+using TodoListApp.Application.Tasks.ViewModels;
+using TodoListApp.Application.Users.ViewModels;
 using TodoListApp.Core.Domain;
 
 namespace TodoListApp.Application.Mapper
@@ -11,7 +11,7 @@ namespace TodoListApp.Application.Mapper
     {
         public MapperProfile()
         {
-            CreateMap<User, ProfileDto>().ReverseMap();
+            CreateMap<User, ProfileViewModel>().ReverseMap();
 
             CreateMap<SingleTask, TaskDto>()
                 .ForMember(dest => dest.PredictedBestBeforeDateExceeded,
@@ -20,7 +20,7 @@ namespace TodoListApp.Application.Mapper
 
             CreateMap<TaskDetails, TaskDetailsDto>().ReverseMap();
 
-            CreateMap<SingleTask, TaskInfoWithDetailsDto>();
+            CreateMap<SingleTask, TaskInfoWithDetailsViewModel>();
         }
     }
 }

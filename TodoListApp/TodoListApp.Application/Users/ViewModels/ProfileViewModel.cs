@@ -1,6 +1,6 @@
-﻿namespace TodoListApp.Application.Users.DTO
+﻿namespace TodoListApp.Application.Users.ViewModels
 {
-    public class ProfileDto
+    public class ProfileViewModel
     {
         public int UserId { get; set; }
         public string Email { get; set; }

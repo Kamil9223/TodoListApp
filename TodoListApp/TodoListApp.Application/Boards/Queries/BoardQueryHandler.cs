@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TodoListApp.Application.Boards.DTO;
+using TodoListApp.Application.Boards.ViewModels;
 using TodoListApp.Application.Tasks.DTO;
 using TodoListApp.Core.DomainAccessAbstraction;
 
 namespace TodoListApp.Application.Boards.Queries
 {
-    public class BoardQueryHandler : IRequestHandler<BoardQuery, BoardDto>
+    public class BoardQueryHandler : IRequestHandler<BoardQuery, BoardViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -21,14 +21,14 @@ namespace TodoListApp.Application.Boards.Queries
             _mapper = mapper;
         }
 
-        public async Task<BoardDto> Handle(BoardQuery request, CancellationToken cancellationToken)
+        public async Task<BoardViewModel> Handle(BoardQuery request, CancellationToken cancellationToken)
         {
             var boards = await _unitOfWork.Boards.GetAllWithTasks(request.UserId);
 
             var sortedBoards = boards.OrderBy(x => x.CategoryName).ToList();
             var boardCategoriesWithIdsDictionary = sortedBoards.ToDictionary(x => x.TasksBoardId, x => x.CategoryName);
 
-            var mainPanel = new BoardDto
+            var mainPanel = new BoardViewModel
             {
                 Categories = boardCategoriesWithIdsDictionary,
                 Tasks = new List<TaskDto>(),

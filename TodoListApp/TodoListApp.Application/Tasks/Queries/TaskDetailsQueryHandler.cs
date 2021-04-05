@@ -2,12 +2,12 @@
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using TodoListApp.Application.Tasks.DTO;
+using TodoListApp.Application.Tasks.ViewModels;
 using TodoListApp.Core.DomainAccessAbstraction;
 
 namespace TodoListApp.Application.Tasks.Queries
 {
-    public class TaskDetailsQueryHandler : IRequestHandler<TaskDetailsQuery, TaskInfoWithDetailsDto>
+    public class TaskDetailsQueryHandler : IRequestHandler<TaskDetailsQuery, TaskInfoWithDetailsViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -18,11 +18,11 @@ namespace TodoListApp.Application.Tasks.Queries
             _mapper = mapper;
         }
 
-        public async Task<TaskInfoWithDetailsDto> Handle(TaskDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<TaskInfoWithDetailsViewModel> Handle(TaskDetailsQuery request, CancellationToken cancellationToken)
         {
             var taskWithDetails = await _unitOfWork.Tasks.GetWithDetails(request.TaskId);
 
-            return _mapper.Map<TaskInfoWithDetailsDto>(taskWithDetails);
+            return _mapper.Map<TaskInfoWithDetailsViewModel>(taskWithDetails);
         }
     }
 }

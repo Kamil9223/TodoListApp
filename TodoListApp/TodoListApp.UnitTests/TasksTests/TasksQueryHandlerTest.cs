@@ -33,8 +33,8 @@ namespace TodoListApp.UnitTests.TasksTests
                 TasksBoardId = 1
             }, CancellationToken.None);
 
-            result.Count.Should().Be(3);
-            result.First().TaskName.Should().Be("sprzątanie pokoju");
+            result.Tasks.Count.Should().Be(3);
+            result.Tasks.First().TaskName.Should().Be("sprzątanie pokoju");
         }
     }
 }
