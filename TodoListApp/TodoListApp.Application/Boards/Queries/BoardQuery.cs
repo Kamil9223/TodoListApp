@@ -5,6 +5,7 @@ namespace TodoListApp.Application.Boards.Queries
 {
     public class BoardQuery : IRequest<BoardDto>
     {
-        public int userId { get; set; }
+        public int UserId { get; set; }
+        public int BoardId { get; set; }
     }
 }

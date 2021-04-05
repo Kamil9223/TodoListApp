@@ -22,12 +22,13 @@ namespace TodoListApp.Presentation.Controllers
             _mediator = mediator;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int boardId)
         {
             var mainPanel = await _mediator.Send(new BoardQuery
             {
-                userId = Convert.ToInt32(
-                    HttpContext.User.Claims.Where(x => x.Type == "Id").First().Value)
+                UserId = Convert.ToInt32(
+                    HttpContext.User.Claims.Where(x => x.Type == "Id").First().Value),
+                BoardId = boardId
             });
 
             return View(mainPanel);

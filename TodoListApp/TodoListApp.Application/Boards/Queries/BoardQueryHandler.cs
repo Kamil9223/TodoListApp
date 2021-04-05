@@ -23,19 +23,23 @@ namespace TodoListApp.Application.Boards.Queries
 
         public async Task<BoardDto> Handle(BoardQuery request, CancellationToken cancellationToken)
         {
-            var boards = await _unitOfWork.Boards.GetAllWithTasks(request.userId);
+            var boards = await _unitOfWork.Boards.GetAllWithTasks(request.UserId);
 
             var sortedBoards = boards.OrderBy(x => x.CategoryName).ToList();
+            var boardCategoriesWithIdsDictionary = sortedBoards.ToDictionary(x => x.TasksBoardId, x => x.CategoryName);
 
             var mainPanel = new BoardDto
             {
-                Categories = sortedBoards.ToDictionary(x => x.TasksBoardId, x => x.CategoryName),
-                Tasks = new List<TaskDto>()
+                Categories = boardCategoriesWithIdsDictionary,
+                Tasks = new List<TaskDto>(),
+                ActualBoardId = request.BoardId == default
+                    ? boardCategoriesWithIdsDictionary.FirstOrDefault().Key
+                    : request.BoardId
             };
 
             if (sortedBoards.Any())
             {
-                foreach (var dbTask in sortedBoards.First().Tasks)
+                foreach (var dbTask in sortedBoards.FirstOrDefault(x => x.TasksBoardId == mainPanel.ActualBoardId).Tasks)
                 {
                     mainPanel.Tasks.Add(_mapper.Map<TaskDto>(dbTask));
                 }

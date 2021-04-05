@@ -7,6 +7,6 @@ namespace TodoListApp.Application.Boards.DTO
     {
         public Dictionary<int, string> Categories { get; set; }
         public List<TaskDto> Tasks { get; set; }
-
+        public int ActualBoardId { get; set; }
     }
 }

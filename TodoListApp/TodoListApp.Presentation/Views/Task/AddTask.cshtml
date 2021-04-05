@@ -9,8 +9,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddTask" asp-route-boardId="@Context.Request.Query["boardId"]" method="post">
+        <form asp-action="AddTask" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="BoardId" value="@Context.Request.Query["boardId"]" />
             <div class="form-group">
                 <label asp-for="TaskName" class="control-label">Nazwa:</label>
                 <input asp-for="TaskName" class="form-control" />
@@ -38,6 +39,8 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Board" asp-action="Index" asp-route-boardId="@Context.Request.Query["boardId"]">
+        Back to Board
+    </a>
 </div>
 

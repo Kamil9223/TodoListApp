@@ -31,7 +31,7 @@ namespace TodoListApp.UnitTests.BoardsTests
 
             var result = await userBoardQueryHandler.Handle(new BoardQuery
             {
-                userId = 1
+                UserId = 1
             }, CancellationToken.None);
 
             result.Tasks.Should().HaveCount(3);
@@ -52,7 +52,7 @@ namespace TodoListApp.UnitTests.BoardsTests
 
             var result = await userBoardQueryHandler.Handle(new BoardQuery
             {
-                userId = 1
+                UserId = 1
             }, CancellationToken.None);
 
             result.Tasks.Should().BeEmpty();

@@ -18,7 +18,7 @@
                     @foreach (var category in Model.Categories)
                     {
                         <li class="d-flex d-block mt-2 shadow rounded">
-                            <button class="btn btn-light w-100 h-100" value="@category.Key">@category.Value</button>   
+                            <a class="btn btn-light w-100 h-100" boardId="@category.Key" asp-action="Index" asp-route-boardId="@category.Key">@category.Value</a>             
                         </li>
                     }
                 </ul>
@@ -40,7 +40,7 @@
                      model="@new TodoListApp.Application.Tasks.ViewModels.TasksViewModel
                             {
                                 Tasks = Model.Tasks,
-                                BoardId = Model.Categories.FirstOrDefault().Key
+                                BoardId = Model.ActualBoardId
                             }" />
         </div>
 

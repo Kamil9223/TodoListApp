@@ -3,9 +3,18 @@
 
 // Write your JavaScript code.
 
-//służy do załadowania widoku częściowego zawierającego listę tasków na wybranym boardzie
-$('#sideMenu button').click(function () {
-    $('#dynamicContent').load("Task/Tasks", { "taskBoardId": $(this).val() });
+//służy do nadania obramowania dla naciśniętej kategorii (boardu)
+$(document).ready(function () {
+    $("#sideMenu > ul > li > a").each(function (index, element) {
+        var urlId = window.location.search.split("=")[1];
+
+        if ($(element).attr("boardId") == urlId) {
+            $(element).addClass('border-primary');
+        }
+        else {
+            $(element).removeClass('border-primary');
+        }
+    });
 });
 
 //służy do pokazania/ukrycia opisu konkretnego szczegółu taska
