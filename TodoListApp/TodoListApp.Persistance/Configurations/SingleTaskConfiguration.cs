@@ -26,7 +26,8 @@ namespace TodoListApp.Persistance.Configurations
                 .IsRequired();
 
             builder.HasOne(x => x.Board)
-                .WithMany(x => x.Tasks);
+                .WithMany(x => x.Tasks)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

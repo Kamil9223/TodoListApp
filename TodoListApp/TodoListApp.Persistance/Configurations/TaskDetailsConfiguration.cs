@@ -18,6 +18,10 @@ namespace TodoListApp.Persistance.Configurations
 
             builder.Property(x => x.Description)
                 .HasMaxLength(1000);
+
+            builder.HasOne(x => x.SingleTask)
+                .WithMany(x => x.Details)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

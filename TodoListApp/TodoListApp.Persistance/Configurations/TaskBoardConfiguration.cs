@@ -15,7 +15,8 @@ namespace TodoListApp.Persistance.Configurations
                 .HasMaxLength(50);
 
             builder.HasOne(x => x.User)
-                .WithMany(x => x.Boards);
+                .WithMany(x => x.Boards)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

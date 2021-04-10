@@ -53,6 +53,14 @@ namespace TodoListApp.Presentation.Controllers
             return new JsonResult("Redirect!");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> RemoveBoard(RemoveBoardCommand command)
+        {
+            await _mediator.Send(command);
+
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Redirect()
         {
             return RedirectToAction(nameof(Index));
