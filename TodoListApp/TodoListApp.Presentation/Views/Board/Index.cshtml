@@ -21,7 +21,7 @@
                             <a class="btn btn-light w-100 h-100" boardId="@category.Key" asp-action="Index" asp-route-boardId="@category.Key">@category.Value</a>
                             <form method="post" asp-action="RemoveBoard">
                                 <input type="hidden" name="BoardId" value="@category.Key" />
-                                <input type="submit" value="X" class="btn btn-light" />
+                                <input type="submit" class="btn btn-light" value="X" />
                             </form>
                         </li>
                     }

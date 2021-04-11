@@ -1,0 +1,35 @@
+﻿@model TodoListApp.Application.Tasks.Commands.AddTaskDetailCommand
+
+<div class="modal fade" id="addTaskDetail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addTaskDetailLabel">Add task detail</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>X</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <form action="@Url.Action("AddTaskDetails")" redirect="@Url.Action("Redirect")">
+                        <input type="hidden" name="TaskId" value="@Model.TaskId" />
+
+                        <label asp-for="TaskDetailName"></label>
+                        <input asp-for="TaskDetailName" class="form-control" />
+                        <span asp-validation-for="TaskDetailName" class="text-danger"></span>
+
+                        <label asp-for="TaskDetailDescription"></label>
+                        <input asp-for="TaskDetailDescription" class="form-control" />
+                        <span asp-validation-for="TaskDetailDescription" class="text-danger"></span>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Zamknij</button>
+                <button type="button" class="btn btn-dark" data-save="modal">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>

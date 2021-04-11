@@ -18,7 +18,7 @@ $(document).ready(function () {
 });
 
 //służy do pokazania/ukrycia opisu konkretnego szczegółu taska
-$('#dropdownDescription').click(function () {
+$('.dropdownDescription').click(function () {
     if ($('#' + $(this).val()).hasClass('d-none')) {
         $('#' + $(this).val()).removeClass('d-none');
     }
@@ -49,7 +49,8 @@ contentDiv.on('click', '[data-save="modal"]', function () {
 
         if (data == 'Redirect!') {
             contentDiv.find('.modal').modal('hide');
-            $.get('Board/Redirect');
+            var redirectUrl = form.attr('redirect');
+            $.get(redirectUrl);
             location.reload(true);
         }
         else {

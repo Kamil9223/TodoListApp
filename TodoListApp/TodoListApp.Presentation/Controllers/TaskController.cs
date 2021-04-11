@@ -28,6 +28,27 @@ namespace TodoListApp.Presentation.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> AddTaskDetails(AddTaskDetailCommand command)
+        {
+            if (!ModelState.IsValid)
+                return PartialView("AddTaskDetailPartial", command);
+
+            await _mediator.Send(command);
+
+            return new JsonResult("Redirect!");
+        }
+
+        public IActionResult AddTaskDetails(int taskId)
+        {
+            return PartialView("AddTaskDetailPartial", new AddTaskDetailCommand { TaskId = taskId });
+        }
+
+        public IActionResult Redirect()
+        {
+            return RedirectToAction(nameof(TaskDetails));
+        }
+
+        [HttpPost]
         public async Task<IActionResult> AddTask(AddTaskCommand command)
         {
             if (!ModelState.IsValid)

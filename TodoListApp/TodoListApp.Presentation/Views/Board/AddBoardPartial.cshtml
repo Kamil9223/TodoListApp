@@ -12,7 +12,7 @@
 
             <div class="modal-body">
                 <div class="form-group">
-                    <form action="@Url.Action("AddBoard")">
+                    <form action="@Url.Action("AddBoard")" redirect="@Url.Action("Redirect")">
                         <label asp-for="categoryName"></label>
                         <input asp-for="categoryName" class="form-control" />
                         <span asp-validation-for="categoryName" class="text-danger"></span>
