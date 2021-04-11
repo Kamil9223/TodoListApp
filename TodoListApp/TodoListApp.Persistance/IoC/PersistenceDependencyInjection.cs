@@ -17,6 +17,7 @@ namespace TodoListApp.Persistance.IoC
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITasksBoardRepository, TasksBoardRepository>();
             services.AddScoped<ISingleTaskRepository, SingleTaskRepository>();
+            services.AddScoped<ITaskDetailRepository, TaskDetailRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

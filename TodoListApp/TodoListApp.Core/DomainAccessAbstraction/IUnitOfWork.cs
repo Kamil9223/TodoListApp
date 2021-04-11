@@ -8,6 +8,7 @@ namespace TodoListApp.Core.DomainAccessAbstraction
         IUserRepository Users { get; }
         ITasksBoardRepository Boards { get; }
         ISingleTaskRepository Tasks { get; }
+        ITaskDetailRepository TaskDetails { get; }
         Task<int> Complete();
     }
 }

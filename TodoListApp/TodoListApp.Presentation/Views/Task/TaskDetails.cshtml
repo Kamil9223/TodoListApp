@@ -46,19 +46,26 @@
                                     <i class="fas fa-2x fa-angle-down"></i>
                                 </button>
                             </div>
-                            <div class="col-sm-9">
+                            <div class="col-sm-8">
                                 <text>@detail.TaskDetailName</text>
                             </div>
                             <div class="col-sm-2">
                                 @if (detail.Done)
                                 {
-                                    <span class="text-info">Gotowe</span>
+                                    <span class="text-info"><i class="fas fa-2x fa-check text-success"></i></span>
                                 }
                                 else
                                 {
-                                    <span class="text-danger">Niegotowe</span>
+                                    <span class="text-danger"><i class="fas fa-2x fa-times text-danger"></i></span>
                                 }
                             </div>
+                            <div class="col-sm-1">
+                                <form method="post" asp-action="DeleteDetail">
+                                    <input type="hidden" name="TaskId" value="@Model.SingleTaskId" />
+                                    <input type="hidden" name="TaskDetailId" value="@detail.TaskDetailsId" />
+                                    <input type="submit" class="btn btn-light" value="X" />
+                                </form>
+                            </div>   
                         </div>
 
                         <div id="@detail.TaskDetailsId" class="d-none border-top mt-1">

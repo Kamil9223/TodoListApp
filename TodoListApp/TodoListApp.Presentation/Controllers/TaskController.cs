@@ -49,6 +49,14 @@ namespace TodoListApp.Presentation.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> DeleteDetail(RemoveTaskDetailCommand command)
+        {
+            await _mediator.Send(command);
+
+            return RedirectToAction(nameof(TaskDetails), new { id = command.TaskId });
+        }
+
+        [HttpPost]
         public async Task<IActionResult> AddTask(AddTaskCommand command)
         {
             if (!ModelState.IsValid)
