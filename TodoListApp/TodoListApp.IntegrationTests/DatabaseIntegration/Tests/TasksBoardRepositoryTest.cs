@@ -27,6 +27,7 @@ namespace TodoListApp.IntegrationTests.DatabaseIntegration.Tests
                 _databaseFixture.TodoTasksContext,
                 _userRepository,
                 _boardRepository,
+                null,
                 null);
         }
 

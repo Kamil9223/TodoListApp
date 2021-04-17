@@ -23,10 +23,7 @@ namespace TodoListApp.Application.IoC
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
-            services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IEncrypter, Encrypter>();
-            services.AddScoped<ILoginService, LoginService>();
 
             return services;
         }

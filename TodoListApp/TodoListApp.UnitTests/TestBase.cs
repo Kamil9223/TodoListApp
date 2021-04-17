@@ -25,7 +25,8 @@ namespace TodoListApp.UnitTests
                 new Mock<DbContext>().Object,
                 new Mock<IUserRepository>(),
                 new Mock<ITasksBoardRepository>(),
-                new Mock<ISingleTaskRepository>());
+                new Mock<ISingleTaskRepository>(),
+                new Mock<ITaskDetailRepository>());
         }
     }
 }

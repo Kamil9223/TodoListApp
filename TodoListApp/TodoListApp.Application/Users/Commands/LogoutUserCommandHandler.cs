@@ -1,22 +1,24 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using TodoListApp.Application.Users.Services.Abstractions;
 
 namespace TodoListApp.Application.Users.Commands
 {
     public class LogoutUserCommandHandler : IRequestHandler<LogoutUserCommand>
     {
-        private readonly ILoginService _loginService;
+        private readonly IHttpContextAccessor _httpAccessor;
 
-        public LogoutUserCommandHandler(ILoginService loginService)
+        public LogoutUserCommandHandler(IHttpContextAccessor httpAccessor)
         {
-            _loginService = loginService;
+            _httpAccessor = httpAccessor;
         }
 
         public async Task<Unit> Handle(LogoutUserCommand request, CancellationToken cancellationToken)
         {
-            await _loginService.LogOut();
+            await _httpAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return Unit.Value;
         }
