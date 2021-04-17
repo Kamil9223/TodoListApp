@@ -9,7 +9,7 @@ using TodoListApp.Application.Users.Queries;
 
 namespace TodoListApp.Presentation.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -30,7 +30,10 @@ namespace TodoListApp.Presentation.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!IsCommandValid(result))
+                return View();
 
             return RedirectToAction(nameof(Login));
         }
@@ -47,7 +50,10 @@ namespace TodoListApp.Presentation.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if(!IsCommandValid(result))
+                return View();
 
             return RedirectToAction("Index", "Board");
         }

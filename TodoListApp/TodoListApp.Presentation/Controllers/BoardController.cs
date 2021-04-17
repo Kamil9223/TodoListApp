@@ -11,7 +11,7 @@ using TodoListApp.Application.Boards.Queries;
 namespace TodoListApp.Presentation.Controllers
 {
     [Authorize]
-    public class BoardController : Controller
+    public class BoardController : BaseController
     {
         private readonly ILogger<BoardController> _logger;
         private readonly IMediator _mediator;

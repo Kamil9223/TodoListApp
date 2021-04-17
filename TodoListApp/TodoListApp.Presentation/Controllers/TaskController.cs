@@ -8,7 +8,7 @@ using TodoListApp.Application.Tasks.Queries;
 namespace TodoListApp.Presentation.Controllers
 {
     [Authorize]
-    public class TaskController : Controller
+    public class TaskController : BaseController
     {
         private readonly IMediator _mediator;
 

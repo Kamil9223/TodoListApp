@@ -1,14 +1,14 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using TodoListApp.Application.Exceptions;
+using TodoListApp.Application.Common;
 using TodoListApp.Application.Users.Services.Abstractions;
 using TodoListApp.Core.Domain;
 using TodoListApp.Core.DomainAccessAbstraction;
 
 namespace TodoListApp.Application.Users.Commands
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, ErrorResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEncrypter _encrypter;
@@ -19,14 +19,20 @@ namespace TodoListApp.Application.Users.Commands
             _encrypter = encrypter;
         }
 
-        public async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorResponse> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             if (request.Password != request.ConfirmedPassword)
-                throw new InvalidCredentialsException("Confirmed password is different than password", "");
+            {
+                request.ErrorModel.AddModelError(nameof(request.ConfirmedPassword), ErrorMessages.DifferentConfirmedPassword);
+                return request.ErrorModel;
+            }
 
             var existedUser = await _unitOfWork.Users.Get(request.Email);
             if (existedUser != null)
-                throw new AlreadyExistsException($"User with email: [{request.Email}] already exist.");
+            {
+                request.ErrorModel.AddModelError(nameof(request.Email), ErrorMessages.EmailElreadyExist);
+                return request.ErrorModel;
+            }
 
             var passwordHash = _encrypter.Encrypt(request.Password);
             var user = new User(request.Email, passwordHash);
@@ -34,7 +40,7 @@ namespace TodoListApp.Application.Users.Commands
             await _unitOfWork.Users.Add(user);
             await _unitOfWork.Complete();
 
-            return Unit.Value;
+            return request.ErrorModel;
         }
     }
 }

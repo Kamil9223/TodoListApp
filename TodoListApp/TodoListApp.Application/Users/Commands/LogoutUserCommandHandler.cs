@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using TodoListApp.Application.Common;
 
 namespace TodoListApp.Application.Users.Commands
 {
-    public class LogoutUserCommandHandler : IRequestHandler<LogoutUserCommand>
+    public class LogoutUserCommandHandler : IRequestHandler<LogoutUserCommand, ErrorResponse>
     {
         private readonly IHttpContextAccessor _httpAccessor;
 
@@ -16,11 +17,11 @@ namespace TodoListApp.Application.Users.Commands
             _httpAccessor = httpAccessor;
         }
 
-        public async Task<Unit> Handle(LogoutUserCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorResponse> Handle(LogoutUserCommand request, CancellationToken cancellationToken)
         {
             await _httpAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return Unit.Value;
+            return request.ErrorModel;
         }
     }
 }

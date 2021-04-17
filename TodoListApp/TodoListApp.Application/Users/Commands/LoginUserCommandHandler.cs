@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using TodoListApp.Application.Exceptions;
+using TodoListApp.Application.Common;
 using TodoListApp.Application.Users.Services.Abstractions;
 using TodoListApp.Core.DomainAccessAbstraction;
 
 namespace TodoListApp.Application.Users.Commands
 {
-    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand>
+    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, ErrorResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEncrypter _encrypter;
@@ -24,15 +24,21 @@ namespace TodoListApp.Application.Users.Commands
             _httpAccessor = httpAccessor;
         }
 
-        public async Task<Unit> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorResponse> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.Users.Get(request.Email);
             if (user == null)
-                throw new InvalidCredentialsException();
+            {
+                request.ErrorModel.AddModelError(nameof(request.Email), ErrorMessages.EmailNotExists);
+                return request.ErrorModel;
+            }    
 
             var hash = _encrypter.Encrypt(request.Password);
             if (user.PasswordHash != hash)
-                throw new InvalidCredentialsException();
+            {
+                request.ErrorModel.AddModelError(nameof(request.Password), ErrorMessages.InvalidCredentials);
+                return request.ErrorModel;
+            }
 
             var claims = new[]
             {
@@ -52,7 +58,7 @@ namespace TodoListApp.Application.Users.Commands
                     IsPersistent = false
                 });
 
-            return Unit.Value;
+            return request.ErrorModel;
         }
     }
 }
