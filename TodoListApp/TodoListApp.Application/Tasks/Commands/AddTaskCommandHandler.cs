@@ -2,12 +2,13 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using TodoListApp.Application.Common;
 using TodoListApp.Core.Domain;
 using TodoListApp.Core.DomainAccessAbstraction;
 
 namespace TodoListApp.Application.Tasks.Commands
 {
-    public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand>
+    public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand, ErrorResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -16,7 +17,7 @@ namespace TodoListApp.Application.Tasks.Commands
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(AddTaskCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorResponse> Handle(AddTaskCommand request, CancellationToken cancellationToken)
         {
             var createdAt = DateTime.Now;
 
@@ -30,7 +31,7 @@ namespace TodoListApp.Application.Tasks.Commands
             board.Tasks.Add(newTask);
             await _unitOfWork.Complete();
 
-            return Unit.Value;
+            return request.ErrorModel;
         }
     }
 }

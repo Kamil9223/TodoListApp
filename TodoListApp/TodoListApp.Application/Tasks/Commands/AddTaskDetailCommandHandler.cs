@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using TodoListApp.Application.Common;
 using TodoListApp.Core.Domain;
 using TodoListApp.Core.DomainAccessAbstraction;
 
 namespace TodoListApp.Application.Tasks.Commands
 {
-    public class AddTaskDetailCommandHandler : IRequestHandler<AddTaskDetailCommand>
+    public class AddTaskDetailCommandHandler : IRequestHandler<AddTaskDetailCommand, ErrorResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -15,7 +16,7 @@ namespace TodoListApp.Application.Tasks.Commands
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(AddTaskDetailCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorResponse> Handle(AddTaskDetailCommand request, CancellationToken cancellationToken)
         {
             var newTaskDetail = new TaskDetails(request.TaskDetailName, request.TaskDetailDescription);
 
@@ -23,7 +24,7 @@ namespace TodoListApp.Application.Tasks.Commands
             task.Details.Add(newTaskDetail);
             await _unitOfWork.Complete();
 
-            return Unit.Value;
+            return request.ErrorModel;
         }
     }
 }

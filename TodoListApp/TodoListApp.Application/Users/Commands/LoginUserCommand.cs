@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using TodoListApp.Application.Common;
 
 namespace TodoListApp.Application.Users.Commands

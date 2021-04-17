@@ -48,7 +48,10 @@ namespace TodoListApp.Presentation.Controllers
             command.userId = Convert.ToInt32(
                     HttpContext.User.Claims.Where(x => x.Type == "Id").First().Value);
 
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!IsCommandValid(result))
+                return PartialView("AddBoardPartial");
 
             return new JsonResult("Redirect!");
         }

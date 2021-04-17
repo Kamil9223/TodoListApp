@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using TodoListApp.Application.Common;
 using TodoListApp.Core.DomainAccessAbstraction;
 
 namespace TodoListApp.Application.Tasks.Commands
 {
-    public class RemoveTaskCommandHandler : IRequestHandler<RemoveTaskCommand>
+    public class RemoveTaskCommandHandler : IRequestHandler<RemoveTaskCommand, ErrorResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -14,14 +15,14 @@ namespace TodoListApp.Application.Tasks.Commands
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(RemoveTaskCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorResponse> Handle(RemoveTaskCommand request, CancellationToken cancellationToken)
         {
             var task = await _unitOfWork.Tasks.Get(request.TaskId);
 
             await _unitOfWork.Tasks.Remove(task);
             await _unitOfWork.Complete();
 
-            return Unit.Value;
+            return request.ErrorModel;
         }
     }
 }

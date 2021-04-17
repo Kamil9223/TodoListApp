@@ -33,7 +33,10 @@ namespace TodoListApp.Presentation.Controllers
             if (!ModelState.IsValid)
                 return PartialView("AddTaskDetailPartial", command);
 
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!IsCommandValid(result))
+                return PartialView("AddTaskDetailPartial", command);
 
             return new JsonResult("Redirect!");
         }
@@ -62,7 +65,10 @@ namespace TodoListApp.Presentation.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!IsCommandValid(result))
+                return View();
 
             return RedirectToAction("Index", "Board", new { boardId = command.BoardId });
         }
