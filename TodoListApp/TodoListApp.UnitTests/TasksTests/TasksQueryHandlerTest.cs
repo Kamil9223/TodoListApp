@@ -22,7 +22,7 @@ namespace TodoListApp.UnitTests.TasksTests
         }
 
         [Fact]
-        public async Task Should_returns_correct_mapped_list_of_taskDto()
+        public async Task Should_returns_correct_mapped_list_of_tasksViewModel()
         {
             var tasksQueryHandler = new TasksQueryHandler(_fakeUnitOfWork, _mapper);
 
@@ -35,6 +35,21 @@ namespace TodoListApp.UnitTests.TasksTests
 
             result.Tasks.Count.Should().Be(3);
             result.Tasks.First().TaskName.Should().Be("sprzątanie pokoju");
+        }
+
+        [Fact]
+        public async Task Should_returns_tasksViewModel_with_empty_list_of_task_dtos()
+        {
+            var tasksQueryHandler = new TasksQueryHandler(_fakeUnitOfWork, _mapper);
+
+            _fakeUnitOfWork.TasksMock.SetupEmptyTasksList();
+
+            var result = await tasksQueryHandler.Handle(new TasksQuery
+            {
+                TasksBoardId = 1
+            }, CancellationToken.None);
+
+            result.Tasks.Should().BeEmpty();
         }
     }
 }

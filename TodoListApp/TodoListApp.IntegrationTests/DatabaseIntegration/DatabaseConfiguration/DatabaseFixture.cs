@@ -1,6 +1,8 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using TodoListApp.Core.Domain;
 using TodoListApp.Persistance.Context;
 
 namespace TodoListApp.IntegrationTests.DatabaseIntegration.DatabaseConfiguration
@@ -25,6 +27,18 @@ namespace TodoListApp.IntegrationTests.DatabaseIntegration.DatabaseConfiguration
             TodoTasksContext.Database.EnsureCreated();
 
             InitialDbDataCreator.Seed(TodoTasksContext);
+        }
+
+        public void Clear<T>(T entity) where T : class, IEntity
+        {
+            TodoTasksContext.Set<T>().Remove(entity);
+            TodoTasksContext.SaveChanges();
+        }
+
+        public void Clear<T>(IEnumerable<T> entities) where T: class, IEntity
+        {
+            TodoTasksContext.Set<T>().RemoveRange(entities);
+            TodoTasksContext.SaveChanges();
         }
 
         public void Dispose()

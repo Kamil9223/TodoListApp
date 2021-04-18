@@ -35,5 +35,20 @@ namespace TodoListApp.UnitTests.UsersTests
             result.Email.Should().Be(UserRepositoryTestData.UserEmail);
             result.Points.Should().Be(11);
         }
+
+        [Fact]
+        public async Task Should_returns_null_when_user_not_exist()
+        {
+            var profileQueryHandler = new ProfileQueryHandler(_fakeUnitOfWork, _mapper);
+
+            _fakeUnitOfWork.UsersMock.SetupNullUser();
+
+            var result = await profileQueryHandler.Handle(new ProfileQuery
+            {
+                userId = 1
+            }, CancellationToken.None);
+
+            result.Should().BeNull();
+        }
     }
 }

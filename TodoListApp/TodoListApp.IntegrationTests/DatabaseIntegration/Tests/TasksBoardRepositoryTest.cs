@@ -61,17 +61,7 @@ namespace TodoListApp.IntegrationTests.DatabaseIntegration.Tests
             board.TasksBoardId.Should().NotBe(default);
             board.User.Should().NotBeNull();
 
-            Clear(board);
-        }
-
-        /// <summary>
-        /// Clear test database from added entities during tests
-        /// </summary>
-        /// <param name="tasksBoard"></param>
-        private void Clear(TasksBoard tasksBoard)
-        {
-            _databaseFixture.TodoTasksContext.Boards.Remove(tasksBoard);
-            _databaseFixture.TodoTasksContext.SaveChanges();
+            _databaseFixture.Clear(board);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,7 +22,7 @@ namespace TodoListApp.UnitTests.BoardsTests
         }
 
         [Fact]
-        public async Task Should_returns_correct_mapped_boardDto_when_user_has_at_least_one_board()
+        public async Task Should_returns_correct_mapped_boardViewModel_when_user_has_at_least_one_board()
         {
             var userBoardQueryHandler = new BoardQueryHandler(_fakeUnitOfWork, _mapper);
 
@@ -44,7 +43,7 @@ namespace TodoListApp.UnitTests.BoardsTests
         }
 
         [Fact]
-        public async Task Should_returns_empty_dto_object_when_user_doesnt_has_boards()
+        public async Task Should_returns_empty_viewModel_object_when_user_doesnt_has_boards()
         {
             var userBoardQueryHandler = new BoardQueryHandler(_fakeUnitOfWork, _mapper);
 

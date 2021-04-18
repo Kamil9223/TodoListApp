@@ -24,7 +24,7 @@ namespace TodoListApp.UnitTests.TasksTests
         }
 
         [Fact]
-        public async Task Should_returns_correct_mapped_taskInfoWithDetailsDto()
+        public async Task Should_returns_correct_mapped_taskInfoWithDetailsViewModel()
         {
             var tasksQueryHandler = new TaskDetailsQueryHandler(_fakeUnitOfWork, _mapper);
 
